@@ -1,0 +1,2203 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feasibility & Cost Estimator | Plan.B Engineering Solutions</title>
+
+  <!-- Prevent Theme Flash (Anti-FOUC) -->
+  <style>
+    html.dark {
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    html:not(.dark) {
+      background-color: #f8fafc;
+      color: #020617;
+    }
+  </style>
+  <script>
+    (function () {
+      const saved = localStorage.getItem('apex_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Static Compiled Tailwind CSS (0ms Load Time) -->
+  <link rel="stylesheet" href="output.css">
+
+  <style>
+    input[type=range] {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 9999px;
+      background: #e2e8f0;
+      outline: none;
+      transition: background 0.15s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #f59e0b;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+      transition: transform 0.12s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.18);
+    }
+
+    input[type=range]::-moz-range-progress {
+      background-color: #f59e0b;
+      height: 6px;
+      border-radius: 9999px;
+    }
+
+    input[type=range]::-moz-range-track {
+      background-color: #e2e8f0;
+      height: 6px;
+      border-radius: 9999px;
+    }
+
+    html.dark input[type=range]::-moz-range-track {
+      background-color: #334155;
+    }
+
+    input[type=range]::-moz-range-thumb {
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: #f59e0b;
+      cursor: pointer;
+      border: 2px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 10mm 12mm 10mm 12mm;
+      }
+
+      html,
+      body,
+      #pageContent,
+      main,
+      .liquid-glass-card,
+      .wizard-step,
+      #step-results {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-height: 0 !important;
+        box-shadow: none !important;
+        border: none !important;
+        border-radius: 0 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      nav,
+      footer,
+      header,
+      #btnExportRow,
+      #progressBar,
+      #stepCounterBadge,
+      .page-content-wrap>section:first-child,
+      .wizard-step:not(#step-results),
+      #mobileMenu,
+      #step-results>div:not(#officialCorporatePrintReport),
+      .animate-liquid-blob-1,
+      .animate-liquid-blob-2,
+      [class*="blur-"] {
+        display: none !important;
+      }
+
+      #pageContent,
+      main,
+      .liquid-glass-card,
+      #step-results,
+      #officialCorporatePrintReport {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        opacity: 1 !important;
+        transform: none !important;
+        border: none !important;
+        background: #ffffff !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
+
+      /* Force 100% Flat Rectangular Borders & Standard Colors */
+      #officialCorporatePrintReport * {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        text-shadow: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 transition-colors duration-200 min-h-screen flex flex-col justify-between">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 liquid-glass-nav relative">
+    <div class="max-w-[1700px] mx-auto px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <img src="logo.png" alt="Plan.B Logo"
+          class="h-11 sm:h-12 md:h-13 w-auto object-contain dark:brightness-0 dark:invert transition-transform duration-300 group-hover:scale-105">
+        <div class="leading-none flex flex-col justify-center">
+          <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+            PLAN<span class="text-amber-500">.B</span>
+          </span>
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+            Engineering Solutions
+          </span>
+        </div>
+      </a>
+
+      <div
+        class="hidden md:flex items-center space-x-8 lg:space-x-12 xl:space-x-16 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+        <a href="about.html" class="hover:text-slate-900 dark:hover:text-white transition">About Us</a>
+        <a href="services.html" class="hover:text-slate-900 dark:hover:text-white transition">Services</a>
+        <a href="calculator.html"
+          class="text-amber-500 dark:text-amber-400 font-bold border-b-2 border-amber-500 pb-1">Cost Estimator</a>
+        <a href="projects.html" class="hover:text-slate-900 dark:hover:text-white transition">Projects</a>
+        <a href="index.html#faq" class="hover:text-slate-900 dark:hover:text-white transition">FAQ</a>
+        <a href="contact.html" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" type="button" aria-label="Toggle Theme"
+          class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 dark:hover:text-amber-400 transition">
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.75"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+            </path>
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="1.75"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+          </svg>
+        </button>
+        <a href="contact.html"
+          class="hidden sm:inline-flex items-center bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition shadow-md shadow-amber-500/20">Submit
+          RFP</a>
+
+        <button id="mobileMenuBtn" type="button" aria-label="Toggle Menu"
+          class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+            <path id="menuBurger" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="menuClose" class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Backdrop -->
+    <div id="mobileMenuBackdrop" class="fixed inset-0 z-40 hidden md:hidden"></div>
+
+    <!-- Mobile Floating Popover Card -->
+    <div id="mobileMenu"
+      class="hidden md:hidden fixed top-24 right-4 sm:right-6 w-[calc(100vw-2rem)] max-w-xs sm:max-w-sm bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-5 shadow-2xl z-50 transition-all duration-200">
+
+      <!-- Search / Quick Filter Bar -->
+      <div class="relative mb-3">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input type="text" id="mobileSearchInput" placeholder="SEARCH MENU / PAGES"
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/60 text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition">
+      </div>
+
+      <!-- Navigation Links with Pill Highlights -->
+      <div class="space-y-1 py-1" id="mobileNavItems">
+        <a href="about.html"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">About
+          Us</a>
+        <a href="services.html"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Services</a>
+        <a href="calculator.html"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-500">Cost
+          Estimator</a>
+        <a href="projects.html"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Projects</a>
+        <a href="index.html#faq"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">FAQ</a>
+        <a href="contact.html"
+          class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Contact</a>
+      </div>
+
+      <!-- Bottom Action Button -->
+      <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <a href="contact.html"
+          class="mobile-nav-link block text-center w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3.5 px-4 rounded-xl shadow-md transition duration-200">
+          Submit RFP
+        </a>
+      </div>
+    </div>
+
+    <!-- Header Bottom Outline Scroll Progress Bar -->
+    <div
+      class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-slate-200/20 dark:bg-slate-800/40 pointer-events-none overflow-hidden z-50">
+      <div id="headerScrollProgress"
+        class="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.9)] transition-all duration-75"
+        style="width: 0%;"></div>
+    </div>
+  </nav>
+
+  <!-- PAGE CONTENT WRAPPER FOR SEAMLESS TRANSITIONS -->
+  <div id="pageContent" class="page-content-wrap flex-grow flex flex-col justify-between">
+
+    <!-- PAGE HEADER / HERO -->
+    <section class="relative pt-24 pb-20 px-6 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+      <div class="absolute inset-0 z-0">
+        <img src="services_hero.jpg" alt="Plan.B Engineering Feasibility Schematic"
+          class="w-full h-full object-cover object-center">
+        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-950/70"></div>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight">
+          Construction Cost Estimator & <br class="hidden sm:inline"><span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Feasibility
+            Calculator.</span>
+        </h1>
+        <p class="text-slate-300 text-lg sm:text-xl max-w-3xl mt-4 leading-relaxed drop-shadow">Calculate accurate
+          building feasibility, grey structure costs, finishing tiers, and instant BOQ breakdowns tailored for Pakistan
+          construction standards.</p>
+      </div>
+    </section>
+
+    <!-- MAIN CALCULATOR CONTAINER -->
+    <main
+      class="py-10 sm:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full flex-1 flex flex-col items-center justify-center relative overflow-hidden">
+
+      <!-- Fluid Animated Liquid Glass Ambient Blobs -->
+      <div
+        class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[550px] sm:w-[720px] h-[550px] sm:h-[720px] bg-gradient-to-tr from-amber-500/20 via-amber-400/15 to-indigo-600/15 rounded-full blur-[120px] pointer-events-none -z-10 animate-liquid-blob-1">
+      </div>
+      <div
+        class="absolute bottom-10 right-10 w-96 h-96 bg-gradient-to-br from-amber-500/15 to-cyan-500/15 rounded-full blur-[100px] pointer-events-none -z-10 animate-liquid-blob-2">
+      </div>
+      <div
+        class="absolute top-10 left-10 w-80 h-80 bg-gradient-to-tr from-blue-600/15 to-amber-500/15 rounded-full blur-[90px] pointer-events-none -z-10 animate-liquid-blob-1">
+      </div>
+
+      <div
+        class="max-w-4xl w-full liquid-glass-card rounded-3xl overflow-hidden flex flex-col min-h-[680px] transition-all duration-300 relative z-10">
+
+        <!-- Top Header inside Wizard Box -->
+        <header class="px-6 py-5 liquid-glass-header flex items-center justify-between">
+          <div>
+            <span
+              class="text-[10px] font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400 block">Plan.B
+              Cost & Feasibility Calculator</span>
+            <h1 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight mt-0.5">Construction
+              Cost Estimator </h1>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="stepCounterBadge"
+              class="text-xs font-semibold text-slate-700 dark:text-slate-300 liquid-glass-pill px-3.5 py-1.5 rounded-full">
+              1 of 7
+            </span>
+          </div>
+        </header>
+
+        <!-- Linear Progress Indicator -->
+        <div class="w-full bg-slate-100 dark:bg-slate-800 h-1">
+          <div id="progressBar" class="bg-amber-500 h-1 transition-all duration-300 ease-out" style="width: 14.28%;">
+          </div>
+        </div>
+
+        <!-- Wizard Steps Body -->
+        <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between">
+
+          <!-- STEP 1: Land Category -->
+          <div id="step-1" class="wizard-step space-y-6">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Select Land Use Classification
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Zoning parameters dictate permissible storey
+                heights, setback ratios, and structural live-loads.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+              <label
+                class="cursor-pointer border-2 border-amber-500 bg-amber-500/10 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition shadow-md shadow-amber-500/10"
+                id="card-land-residential">
+                <input type="radio" name="landType" value="residential" checked class="sr-only"
+                  onchange="updateRadioSelection('landType')">
+                <div>
+                  <div
+                    class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-800 dark:text-amber-400 mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
+                  </div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Residential</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Domestic units up
+                    to 4
+                    storeys (G+3) under CDA, LDA, and Cantonment bylaws.</span>
+                </div>
+              </label>
+
+              <label
+                class="cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5"
+                id="card-land-commercial">
+                <input type="radio" name="landType" value="commercial" class="sr-only"
+                  onchange="updateRadioSelection('landType')">
+                <div>
+                  <div
+                    class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-800 dark:text-amber-400 mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                    </svg>
+                  </div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Commercial Plaza</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Retail and office
+                    towers up
+                    to 18 storeys with mezzanine floor allowances.</span>
+                </div>
+              </label>
+
+              <label
+                class="cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5"
+                id="card-land-industrial">
+                <input type="radio" name="landType" value="industrial" class="sr-only"
+                  onchange="updateRadioSelection('landType')">
+                <div>
+                  <div
+                    class="w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-800 dark:text-amber-400 mb-3">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"
+                        d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
+                    </svg>
+                  </div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Industrial / Shed</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Warehouses and
+                    manufacturing
+                    facilities with open vertical clearance.</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- STEP 2: Location, Development Authority & Foundation Soil -->
+          <div id="step-2" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Jurisdiction & Geotechnical
+                Soil
+                Profile</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Different housing authorities impose unique
+                vetting fees, and soil bearing capacity dictates foundation engineering.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <!-- City & Authority Selector -->
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+                <label
+                  class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 block">Metropolitan
+                  Area & Authority</label>
+                <select id="selAuthority" onchange="updateAuthorityParams()"
+                  class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                  <option value="dha_lahore" selected>Lahore — DHA / Cantt / Lake City (High Scrutiny)</option>
+                  <option value="lda_lahore">Lahore — LDA / City Towns (Standard Scrutiny)</option>
+                  <option value="isb_cda">Islamabad — CDA / Sectors (Earthquake Zone 2B)</option>
+                  <option value="isb_bahria">Rawalpindi / Islamabad — Bahria Town / DHA</option>
+                  <option value="karachi_dha">Karachi — DHA / Clifton / Coastal (Corrosion Defense)</option>
+                  <option value="general_pk">Other Municipalities / Private Housing Societies</option>
+                </select>
+                <p id="authorityNote" class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                  Includes society vetting dues, possession inspection fees, and strict non-daytime mixer regulations.
+                </p>
+              </div>
+
+              <!-- Soil Condition & Foundation Type -->
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+                <label
+                  class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400 block">Soil
+                  Bearing Capacity & Footing Type</label>
+                <select id="selFoundation"
+                  class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                  <option value="strip" selected>Normal Firm Soil (Standard Strip & Pad Footings)</option>
+                  <option value="raft">Low Bearing / Filled Soil (+18% Heavy Raft Foundation)</option>
+                  <option value="piling">Unstable / Waterlogged / Silt (+28% Deep Bored Piling)</option>
+                </select>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal">
+                  Reclaimed land requires heavier steel cage reinforcement and deeper PCC bed thickness.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 3: Land Size Selection -->
+          <div id="step-3" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Total Plot Size</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Specify plot dimensions using standard
+                Pakistani
+                units or exact custom square footage.</p>
+            </div>
+
+            <div
+              class="inline-flex p-0.5 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 text-xs font-medium">
+              <button type="button" onclick="setAreaUnit('marla')" id="tab-unit-marla"
+                class="px-3.5 py-1.5 rounded-md bg-amber-500 text-slate-950 font-bold shadow-sm transition">Marla</button>
+              <button type="button" onclick="setAreaUnit('kanal')" id="tab-unit-kanal"
+                class="px-3.5 py-1.5 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">Kanal</button>
+              <button type="button" onclick="setAreaUnit('acre')" id="tab-unit-acre"
+                class="px-3.5 py-1.5 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">Acre</button>
+              <button type="button" onclick="setAreaUnit('sqft')" id="tab-unit-sqft"
+                class="px-3.5 py-1.5 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">Sq.
+                Ft</button>
+            </div>
+
+            <!-- Slider Mode -->
+            <div id="sliderAreaSection"
+              class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex justify-between items-center">
+                <div>
+                  <span id="sliderDisplayLabel" class="text-base font-bold text-slate-900 dark:text-white block">10
+                    Marla</span>
+                  <span id="sliderFootprintBadge" class="text-xs text-slate-500 dark:text-slate-400">Footprint: 2,250
+                    sq.
+                    ft</span>
+                </div>
+                <button type="button" onclick="toggleCustomArea(true)"
+                  class="text-xs text-amber-600 dark:text-amber-400 hover:underline font-semibold">Custom input</button>
+              </div>
+
+              <div class="py-2">
+                <input type="range" id="unitRangeSlider" oninput="onSliderMove(this.value)"
+                  class="w-full cursor-pointer">
+              </div>
+
+              <div id="sliderTicksRow"
+                class="flex justify-between text-[11px] font-medium text-slate-400 dark:text-slate-500"></div>
+            </div>
+
+            <!-- Custom Mode -->
+            <div id="customAreaSection"
+              class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 hidden bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex justify-between items-center">
+                <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider"
+                  id="customInputLabel">Custom Area Value</label>
+                <button type="button" onclick="toggleCustomArea(false)"
+                  class="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">← Back
+                  to
+                  slider</button>
+              </div>
+              <div class="relative max-w-xs">
+                <input type="number" id="customNumberInput" min="0.1" step="any" value="10"
+                  oninput="onCustomNumberInput(this.value)"
+                  class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-amber-500 pr-20">
+                <span id="customUnitBadge"
+                  class="absolute right-3 top-2.5 text-xs font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider">MARLA</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 4: Storeys, Basement & Substructure -->
+          <div id="step-4" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Storeys & Subterranean
+                Basement
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="step3Hint">Residential zoning allows up to
+                4
+                storeys (G+3).</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="flex justify-between items-center">
+                  <span
+                    class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Above-Ground
+                    Levels</span>
+                  <span id="displayFloors"
+                    class="text-xs font-semibold text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-2.5 py-0.5 rounded border border-slate-200 dark:border-slate-700">2
+                    Floors</span>
+                </div>
+                <div class="py-2">
+                  <input type="range" id="floorsSlider" min="1" max="4" value="2"
+                    oninput="onFloorSliderMove(this.value)" class="w-full cursor-pointer">
+                </div>
+                <div class="flex justify-between text-[11px] text-slate-400 dark:text-slate-500">
+                  <span>Ground only (1)</span>
+                  <span id="maxFloorLabel">Max (4)</span>
+                </div>
+              </div>
+
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-2 bg-slate-50/50 dark:bg-slate-800/40">
+                <label
+                  class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Basement
+                  Requirement</label>
+                <select id="selBasement"
+                  class="w-full p-2.5 border border-slate-200 dark:border-slate-700 rounded-lg text-xs font-semibold bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                  <option value="none">No Basement</option>
+                  <option value="partial">Partial Basement (50% Footprint)</option>
+                  <option value="full" selected>Full Basement (100% Footprint)</option>
+                </select>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-normal pt-1">Includes deep mechanical
+                  excavation, dewatering plant, and bitumen membranes.</p>
+              </div>
+            </div>
+
+            <div id="mezzanineOptionWrapper"
+              class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between hidden">
+              <div>
+                <div class="text-xs font-bold text-slate-900 dark:text-white">Commercial Mezzanine Level</div>
+                <div class="text-[11px] text-slate-500 dark:text-slate-400">Intermediate deck covering 60% of ground
+                  floor
+                  footprint</div>
+              </div>
+              <input type="checkbox" id="chkMezzanine" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
+            </div>
+          </div>
+
+          <!-- STEP 5: Material Specification Standard -->
+          <div id="step-5" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Material Specification
+                Standard
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Select an architectural grade benchmark or
+                override with quotes from local suppliers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-stretch">
+              <label
+                class="cursor-pointer border-2 border-amber-500 bg-amber-500/10 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition shadow-md shadow-amber-500/10"
+                id="card-mat-classA">
+                <input type="radio" name="materialTier" value="classA" checked class="sr-only"
+                  onchange="updateRadioSelection('materialTier')">
+                <div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Class A (Premium)</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Grade-60 Rebar,
+                    Branded
+                    Cement, Awwal Brickwork, Porcelain Tile Finishes.</span>
+                </div>
+              </label>
+
+              <label
+                class="cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5"
+                id="card-mat-classB">
+                <input type="radio" name="materialTier" value="classB" class="sr-only"
+                  onchange="updateRadioSelection('materialTier')">
+                <div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Class B (Standard)</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Grade-40 Rebar,
+                    Standard
+                    Cement, Doyam Bricks, Domestic Ceramic Tilework.</span>
+                </div>
+              </label>
+
+              <label
+                class="cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5"
+                id="card-mat-custom">
+                <input type="radio" name="materialTier" value="custom" class="sr-only"
+                  onchange="updateRadioSelection('materialTier')">
+                <div>
+                  <span class="font-bold text-slate-900 dark:text-white text-sm block">Custom Trader Rates</span>
+                  <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed block">Input live unit
+                    purchase
+                    rates for key procurement items from traders.</span>
+                </div>
+              </label>
+            </div>
+
+            <!-- Custom Trader Drawer -->
+            <div id="customTraderDrawer"
+              class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40 hidden">
+              <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-600 dark:text-slate-400">Material
+                  Procurement Pricing</span>
+                <button type="button" onclick="resetTraderDefaults()"
+                  class="text-xs text-amber-600 dark:text-amber-400 hover:underline">Reset Market Averages</button>
+              </div>
+              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Steel Rebar (PKR
+                    /
+                    Ton)</label>
+                  <input type="number" id="tradeSteel" value="265000"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Cement (PKR /
+                    50kg
+                    Bag)</label>
+                  <input type="number" id="tradeCement" value="1420"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Bricks (PKR /
+                    1,000)</label>
+                  <input type="number" id="tradeBricks" value="13500"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Crush (PKR /
+                    Cu.ft)</label>
+                  <input type="number" id="tradeCrush" value="135"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Sand (PKR /
+                    Cu.ft)</label>
+                  <input type="number" id="tradeSand" value="48"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600 dark:text-slate-400 block mb-1">Finishing (PKR /
+                    sq. ft)</label>
+                  <input type="number" id="tradeFinish" value="3800"
+                    class="w-full p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded text-xs font-medium text-slate-900 dark:text-white outline-none focus:border-amber-500">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 6: Daily Labour Rates & Active Crew -->
+          <div id="step-6" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Daily Labour Engine</h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Labour is computed strictly via
+                <strong>per-worker daily wage rates</strong> across active project working days.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+                <span
+                  class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Daily
+                  Wage Scale</span>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-slate-700 dark:text-slate-300">Skilled Craftsman (Mistri):</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-xs text-slate-400">₨</span>
+                    <input type="number" id="wageMistri" value="2600"
+                      class="w-20 p-1.5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-semibold text-right outline-none">
+                  </div>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-slate-700 dark:text-slate-300">General Labourer (Mazdoor):</span>
+                  <div class="flex items-center gap-1">
+                    <span class="text-xs text-slate-400">₨</span>
+                    <input type="number" id="wageHelper" value="1600"
+                      class="w-20 p-1.5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-semibold text-right outline-none">
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Active
+                    Daily Crew</span>
+                  <span id="badgeTotalCrew"
+                    class="text-xs font-semibold text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">12
+                    Workers</span>
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-slate-700 dark:text-slate-300">Head Craftsmen / Mistris:</span>
+                  <input type="number" id="crewMistriCount" value="4" min="1"
+                    class="w-16 p-1.5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-semibold text-center outline-none"
+                    oninput="updateCrewDisplay()">
+                </div>
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-slate-700 dark:text-slate-300">Helpers / Mazdoors:</span>
+                  <input type="number" id="crewHelperCount" value="8" min="1"
+                    class="w-16 p-1.5 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white rounded text-xs font-semibold text-center outline-none"
+                    oninput="updateCrewDisplay()">
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-3.5 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex justify-between items-center text-xs">
+              <span class="text-slate-600 dark:text-slate-400 font-medium">Daily On-Site Payroll:</span>
+              <span id="dailyPayrollBadge" class="font-bold text-slate-900 dark:text-white">PKR 23,200 / day</span>
+            </div>
+          </div>
+
+          <!-- STEP 7: Timeline, Urgency & Bounded Margins -->
+          <div id="step-7" class="wizard-step space-y-6 hidden">
+            <div>
+              <h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">Project Delivery & Safeguards
+              </h2>
+              <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Accelerated project delivery adds speed demand
+                premiums. Commercial buffers are clamped strictly.</p>
+            </div>
+
+            <div
+              class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-3 bg-slate-50/50 dark:bg-slate-800/40">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">Target
+                  Delivery Timeline</span>
+                <span id="displayDurationLabel"
+                  class="text-xs font-semibold text-slate-900 dark:text-white bg-white dark:bg-slate-800 px-2.5 py-1 rounded border border-slate-200 dark:border-slate-700">12
+                  Months (300 Working Days)</span>
+              </div>
+              <div class="py-2">
+                <input type="range" id="sliderTimeline" min="4" max="30" value="12" step="1"
+                  oninput="onTimelineMove(this.value)" class="w-full cursor-pointer">
+              </div>
+              <div class="flex justify-between text-[11px] text-slate-400 dark:text-slate-500">
+                <span>Fast-track (4 Mo)</span>
+                <span>Optimal (12 Mo)</span>
+                <span>Extended (30 Mo)</span>
+              </div>
+
+              <div
+                class="pt-2 flex justify-between items-center text-xs border-t border-slate-200 dark:border-slate-700">
+                <span class="text-slate-500 dark:text-slate-400">Speed Urgency Premium:</span>
+                <span id="badgeDemandSurcharge" class="font-semibold text-slate-900 dark:text-white">0.0% (Optimal
+                  Schedule)</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div
+                class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Price Escalation Buffer</span>
+                  <span id="badgeEscValue" class="text-xs font-bold text-slate-900 dark:text-white">8.0%</span>
+                </div>
+                <div class="py-1">
+                  <input type="range" id="sliderEscalation" min="7" max="10" step="0.5" value="8"
+                    oninput="onBufferMove()" class="w-full cursor-pointer">
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 mt-1">
+                  <span>Locked Min: 7.0%</span>
+                  <span>Locked Max: 10.0%</span>
+                </div>
+              </div>
+
+              <div
+                class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="flex justify-between items-center mb-2">
+                  <span class="text-xs font-semibold text-slate-700 dark:text-slate-300">Contractor Profit Margin</span>
+                  <span id="badgeContValue" class="text-xs font-bold text-slate-900 dark:text-white">12.0%</span>
+                </div>
+                <div class="py-1">
+                  <input type="range" id="sliderContractor" min="10" max="15" step="0.5" value="12"
+                    oninput="onBufferMove()" class="w-full cursor-pointer">
+                </div>
+                <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-500 mt-1">
+                  <span>Locked Min: 10.0%</span>
+                  <span>Locked Max: 15.0%</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RESULTS: Executive BOQ Summary, Milestones & Export -->
+          <div id="step-results" class="wizard-step space-y-6 hidden">
+
+            <!-- PRINT-ONLY OFFICIAL CLASSIC CORPORATE REPORT (PVT. LTD. A4 FORMAT) -->
+            <div id="officialCorporatePrintReport"
+              class="hidden print:block font-sans text-slate-900 bg-white leading-normal">
+              <!-- 1. Corporate Letterhead Header -->
+              <div class="border-b-2 border-slate-900 pb-3 mb-4 flex justify-between items-start">
+                <div>
+                  <div class="text-xl font-black uppercase tracking-wider text-slate-950">PLAN.B ENGINEERING SOLUTIONS
+                    (PVT.) LTD.</div>
+                  <div class="text-xs font-semibold text-slate-800 tracking-tight mt-0.5">Architectural, Structural &
+                    Pre-Construction Cost Engineering Services</div>
+                  <div class="text-[10px] text-slate-600 mt-1 font-mono">SEC Reg. No: CUIN-0198425 | PEC Registration:
+                    CIVIL/38491 | NTN: 7492014-9</div>
+                  <div class="text-[10px] text-slate-600 font-sans mt-0.5">Corporate Office: H-12 Tech Zone, Main
+                    Boulevard, DHA Phase 6, Lahore | UAN: +92 42 111 752 622</div>
+                </div>
+                <div class="text-right">
+                  <div
+                    class="bg-slate-950 text-white font-bold text-xs px-3 py-1 tracking-wider uppercase inline-block mb-1.5">
+                    Official Estimation Report</div>
+                  <div class="text-xs text-slate-800">Ref Code: <span id="formalReportRef"
+                      class="font-mono font-bold">PLB-EST-2026-9842</span></div>
+                  <div class="text-xs text-slate-800">Issue Date: <span id="formalReportDate" class="font-medium">16
+                      September 2026</span></div>
+                  <div class="text-xs text-slate-700">Status: <span class="font-bold text-emerald-800">BANKABLE
+                      FEASIBILITY</span></div>
+                </div>
+              </div>
+
+              <!-- 2. Project Parameter Matrix Table -->
+              <div class="mb-4">
+                <div
+                  class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1.5 border border-slate-900 border-b-0">
+                  1. PROJECT PARAMETERS & GEOTECHNICAL PROFILE</div>
+                <table class="w-full text-xs border-collapse border border-slate-900">
+                  <tbody>
+                    <tr class="divide-x divide-slate-900 border-b border-slate-900">
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800 w-1/4">Project Zoning / Category:</td>
+                      <td class="p-2 font-semibold w-1/4" id="formalZoning">Residential (G+2)</td>
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800 w-1/4">Jurisdiction & Authority:</td>
+                      <td class="p-2 font-semibold w-1/4" id="formalAuthority">DHA Lahore (High Scrutiny)</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900 border-b border-slate-900">
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Plot Footprint Area:</td>
+                      <td class="p-2 font-semibold" id="formalPlotSize">10 Marla (2,250 sq. ft)</td>
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Total Covered Area:</td>
+                      <td class="p-2 font-bold text-slate-950 font-mono" id="formalCoveredArea">5,738 sq. ft</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900 border-b border-slate-900">
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Foundation Soil Profile:</td>
+                      <td class="p-2 font-semibold" id="formalFoundation">Standard Strip Footing</td>
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Material Specification Std:</td>
+                      <td class="p-2 font-semibold" id="formalMaterialTier">Class A (Premium Grade)</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Target Delivery Schedule:</td>
+                      <td class="p-2 font-semibold" id="formalTimeline">12 Months (300 Days)</td>
+                      <td class="p-2 font-bold bg-slate-50 text-slate-800">Daily Labour Strength:</td>
+                      <td class="p-2 font-semibold" id="formalCrew">12 Crew (4 Mistri, 8 Mazdoor)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 3. Financial Grand Total Summary Box -->
+              <div class="mb-4 border-2 border-slate-900 p-3 bg-slate-50 flex justify-between items-center">
+                <div>
+                  <div class="text-xs font-bold uppercase tracking-wider text-slate-700">Total Estimated Turnkey
+                    Contract Value (Inclusive of Taxes & Fees)</div>
+                  <div class="text-2xl font-black font-mono text-slate-950 mt-0.5" id="formalGrandTotal">PKR 51,354,475
+                  </div>
+                  <div class="text-xs font-semibold italic text-slate-800 mt-1" id="formalWordsTotal">Amount in Words:
+                    Fifty-One Million Three Hundred Fifty-Four Thousand Four Hundred Seventy-Five Rupees Only</div>
+                </div>
+                <div class="text-right border-l-2 border-slate-300 pl-4">
+                  <div class="text-xs font-bold uppercase tracking-wider text-slate-700">Composite Unit Rate</div>
+                  <div class="text-base font-bold font-mono text-slate-950" id="formalUnitRate">PKR 8,951 / sq. ft</div>
+                  <div class="text-[10px] text-slate-600 mt-0.5">Calculated on Total Covered Area</div>
+                </div>
+              </div>
+
+              <!-- 4. Itemized BOQ Table -->
+              <div class="mb-4">
+                <div
+                  class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1.5 border border-slate-900 border-b-0">
+                  2. ITEMIZED BILL OF QUANTITIES (BOQ) ACCOUNTING TAKEOFF</div>
+                <table class="w-full text-xs border-collapse border border-slate-900">
+                  <thead class="bg-slate-900 text-white font-bold uppercase border-b border-slate-900">
+                    <tr class="divide-x divide-slate-800">
+                      <th class="p-2 text-center w-10">Item</th>
+                      <th class="p-2 text-left">Cost Head Description</th>
+                      <th class="p-2 text-left">Geotechnical / Engineering Parameters</th>
+                      <th class="p-2 text-right w-36">Estimated Amount (PKR)</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-900 text-slate-900 font-medium">
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">1.0</td>
+                      <td class="p-2 font-semibold">Materials (Grey Frame + Architectural Finishes)</td>
+                      <td class="p-2 text-slate-700" id="formalBasisMat">3,825 sq. ft framing</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtMat">19,890,000</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">2.0</td>
+                      <td class="p-2 font-semibold">Labour (Daily Payroll & Craftsmen Wages)</td>
+                      <td class="p-2 text-slate-700" id="formalBasisLab">12 crew @ 300 days</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtLab">6,960,000</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">3.0</td>
+                      <td class="p-2 font-semibold">Foundation Engineering & Subsoil Footing</td>
+                      <td class="p-2 text-slate-700" id="formalBasisFnd">Standard strip footing (0% surcharge)</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtFnd">0</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">4.0</td>
+                      <td class="p-2 font-semibold">Subterranean Basement Structural Substructure</td>
+                      <td class="p-2 text-slate-700" id="formalBasisBsm">1,913 sq. ft RCC retaining walls</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtBsm">14,955,750</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">5.0</td>
+                      <td class="p-2 font-semibold">Authority Vetting, Society NOC & Temp Utilities</td>
+                      <td class="p-2 text-slate-700" id="formalBasisAut">DHA Lahore (High Scrutiny & Vetting)</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtAut">650,000</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">6.0</td>
+                      <td class="p-2 font-semibold">Speed & Schedule Urgency Demand Surcharge</td>
+                      <td class="p-2 text-slate-700" id="formalBasisSpd">0.0% schedule surcharge</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtSpd">0</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">7.0</td>
+                      <td class="p-2 font-semibold">Price Escalation & Inflation Reserve Buffer</td>
+                      <td class="p-2 text-slate-700" id="formalBasisEsc">8.0% contractual buffer</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtEsc">3,396,460</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900">
+                      <td class="p-2 text-center font-bold">8.0</td>
+                      <td class="p-2 font-semibold">Contractor Engineering Management & Supervision</td>
+                      <td class="p-2 text-slate-700" id="formalBasisPrf">12.0% contractor fee</td>
+                      <td class="p-2 text-right font-mono font-bold" id="formalAmtPrf">5,582,265</td>
+                    </tr>
+                    <tr class="divide-x divide-slate-900 bg-slate-100 font-bold border-t-2 border-slate-900">
+                      <td class="p-2 text-center" colspan="3">FINAL TURNKEY BOQ GRAND TOTAL (PKR):</td>
+                      <td class="p-2 text-right font-mono text-sm font-black" id="formalAmtTotal">51,354,475</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 5. Milestone Payment Schedule -->
+              <div class="mb-4">
+                <div
+                  class="text-xs font-bold uppercase tracking-wider text-slate-900 bg-slate-100 px-3 py-1.5 border border-slate-900 border-b-0">
+                  3. CONTRACTOR MILESTONE PAYMENT DISBURSEMENT SCHEDULE</div>
+                <table class="w-full text-xs border-collapse border border-slate-900 text-center">
+                  <thead class="bg-slate-200 text-slate-900 font-bold uppercase border-b border-slate-900">
+                    <tr class="divide-x divide-slate-900">
+                      <th class="p-1.5">Stage 1 (10%)<br>Mobilization</th>
+                      <th class="p-1.5">Stage 2 (15%)<br>Plinth & Footing</th>
+                      <th class="p-1.5">Stage 3 (15%)<br>Ground Slab</th>
+                      <th class="p-1.5">Stage 4 (15%)<br>Upper Slab</th>
+                      <th class="p-1.5">Stage 5 (15%)<br>Brick & Plaster</th>
+                      <th class="p-1.5">Stage 6 (20%)<br>Finishes & MEP</th>
+                      <th class="p-1.5">Stage 7 (10%)<br>Final Handover</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="divide-x divide-slate-900 font-mono font-bold text-slate-950">
+                      <td class="p-1.5" id="fMile1">5,135,448</td>
+                      <td class="p-1.5" id="fMile2">7,703,171</td>
+                      <td class="p-1.5" id="fMile3">7,703,171</td>
+                      <td class="p-1.5" id="fMile4">7,703,171</td>
+                      <td class="p-1.5" id="fMile5">7,703,171</td>
+                      <td class="p-1.5" id="fMile6">10,270,895</td>
+                      <td class="p-1.5" id="fMile7">5,135,448</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- 6. Legal Attestation & Dual Signature Block -->
+              <div class="border border-slate-900 p-3 mt-4 bg-slate-50">
+                <div class="grid grid-cols-2 gap-8 text-xs mb-2">
+                  <div>
+                    <div class="font-bold text-slate-900 uppercase tracking-wider border-b border-slate-400 pb-1 mb-6">
+                      PREPARED BY (CHIEF COST ENGINEER):</div>
+                    <div class="font-bold text-slate-900">PLAN.B AUTOMATED ENGINEERING ENGINE v4.2</div>
+                    <div class="text-[10px] text-slate-600">Pakistan Engineering Council (PEC) Registered Takeoff
+                      Standard</div>
+                    <div class="text-[9px] text-slate-500 mt-1">Verification Stamp ID: PEC-PLB-VERIFIED-2026</div>
+                  </div>
+                  <div>
+                    <div class="font-bold text-slate-900 uppercase tracking-wider border-b border-slate-400 pb-1 mb-6">
+                      CLIENT ACCEPTANCE & AUTHORIZATION:</div>
+                    <div class="font-bold text-slate-400 border-b border-dashed border-slate-400 pb-1">Client Signature
+                      & Company Seal</div>
+                    <div class="text-[10px] text-slate-600 mt-1">Authorized Signatory / Date</div>
+                  </div>
+                </div>
+                <p class="text-[9px] text-slate-600 leading-normal italic border-t border-slate-300 pt-1.5 text-center">
+                  LEGAL NOTICE: This report is an official pre-construction cost takeoff issued by Plan.B Engineering
+                  Solutions (Pvt.) Ltd. based on municipal bylaws in Pakistan. All estimates are subject to structural
+                  working drawings, geotechnical soil tests, and executed contracts.
+                </p>
+              </div>
+            </div>
+
+            <!-- Header & Direct Export Buttons -->
+            <div
+              class="border-b border-slate-200 dark:border-slate-800 pb-4 flex flex-wrap justify-between items-center gap-3">
+              <div>
+                <span
+                  class="text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500 block">Bankable
+                  Feasibility Report</span>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mt-0.5">Project Financial Estimation & BOQ
+                </h2>
+              </div>
+              <div class="flex items-center gap-2" id="btnExportRow">
+                <button type="button" onclick="shareWhatsApp()"
+                  class="text-xs bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-3.5 py-2.5 rounded-xl flex items-center gap-1.5 transition shadow-sm">
+                  <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                    <path
+                      d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.861.173.086.275.073.376-.044.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12 0 2.159.57 4.199 1.571 5.961l-1.671 6.103 6.276-1.646c1.706.924 3.655 1.458 5.724 1.458 6.627 0 12-5.373 12-12s-5.373-12-12-12z" />
+                  </svg>
+                  Share via WhatsApp
+                </button>
+                <button type="button" onclick="window.print()"
+                  class="text-xs text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white font-semibold px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 transition">
+                  Print / PDF
+                </button>
+              </div>
+            </div>
+
+            <!-- Executive Key Total Card -->
+            <div
+              class="p-6 bg-slate-900 text-white dark:bg-slate-950 rounded-2xl flex flex-wrap justify-between items-baseline gap-4 shadow-lg border border-slate-800">
+              <div>
+                <span class="text-xs font-medium text-slate-400 block">Total Estimated Turnkey Budget</span>
+                <div id="resGrandTotal"
+                  class="text-3xl sm:text-4xl font-extrabold text-amber-400 font-mono tracking-tight mt-0.5">PKR 0</div>
+                <div id="resCroreLakh" class="text-xs text-slate-400 mt-1 font-mono">≈ 0.00 Crore PKR</div>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-400 block">Composite Unit Rate</span>
+                <div id="resEffectiveRate" class="text-base font-semibold text-white mt-0.5 font-mono">PKR 0 / sq. ft
+                </div>
+                <span id="resTotalCoveredArea" class="text-xs text-slate-400 block mt-1">Covered Area: 0 sq. ft</span>
+              </div>
+            </div>
+
+            <!-- Comprehensive BOQ Center Table -->
+            <div class="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
+              <table class="w-full text-left text-xs">
+                <thead
+                  class="bg-slate-100 dark:bg-slate-800/80 text-slate-600 dark:text-slate-400 uppercase font-bold border-b border-slate-200 dark:border-slate-700">
+                  <tr>
+                    <th class="p-3">Cost Head</th>
+                    <th class="p-3">Basis / Geotechnical Parameters</th>
+                    <th class="p-3 text-right">Estimated Amount (PKR)</th>
+                  </tr>
+                </thead>
+                <tbody
+                  class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-700 dark:text-slate-300 font-medium">
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Materials (Grey + Architectural Finish)
+                    </td>
+                    <td id="resBasisMaterials" class="p-3 text-slate-500 dark:text-slate-400">Above-ground framing</td>
+                    <td id="resAmountMaterials"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Labour (Strict Daily Wage Payroll)</td>
+                    <td id="resBasisLabour" class="p-3 text-slate-500 dark:text-slate-400">Crew allocation</td>
+                    <td id="resAmountLabour"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Foundation Engineering & Soil Allowance
+                    </td>
+                    <td id="resBasisFoundation" class="p-3 text-slate-500 dark:text-slate-400">Pad / Raft / Piling
+                      Footing
+                    </td>
+                    <td id="resAmountFoundation"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Subterranean Basement Structure</td>
+                    <td id="resBasisBasement" class="p-3 text-slate-500 dark:text-slate-400">Dewatering & retaining RCC
+                    </td>
+                    <td id="resAmountBasement"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Authority Approvals, Vetting &
+                      Utilities
+                    </td>
+                    <td id="resBasisAuthority" class="p-3 text-slate-500 dark:text-slate-400">Society NOC, Temporary
+                      3-Phase Meter, Water Bore</td>
+                    <td id="resAmountAuthority"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Speed Urgency Demand Surcharge</td>
+                    <td id="resBasisSpeed" class="p-3 text-slate-500 dark:text-slate-400">Double shift schedule premium
+                    </td>
+                    <td id="resAmountSpeed"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">
+                      PKR 0</td>
+                  </tr>
+                  <tr>
+                    <td class="p-3 font-semibold text-slate-900 dark:text-white">Price Escalation Reserve Buffer</td>
+                    <td id="resBasisEscalation" class="p-3 text-slate-500 dark:text-slate-400">Contractual inflation
+                      buffer</td>
+                    <td id="resAmountEscalation"
+                      class="p-3 text-right font-mono font-semibold text-slate-900 dark:text-white">PKR 0</td>
+                  </tr>
+                  <tr class="bg-slate-50 dark:bg-slate-800/40 font-semibold text-slate-900 dark:text-white">
+                    <td class="p-3">Contractor Management & Supervision Fee</td>
+                    <td id="resBasisMargin" class="p-3 text-slate-500 dark:text-slate-400 font-normal">Supervision &
+                      overhead</td>
+                    <td id="resAmountMargin" class="p-3 text-right font-mono font-bold text-amber-500">PKR 0</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Milestone Cash-Flow Schedule -->
+            <div
+              class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40 space-y-3">
+              <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2">
+                <span
+                  class="text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300">Milestone
+                  Payment Disbursement Schedule</span>
+                <span class="text-[11px] text-slate-500 dark:text-slate-400">Standard 7-Stage Construction
+                  Contract</span>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">1.
+                    Mobilization (10%)</span>
+                  <span id="mileAdvance" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">2. Plinth &
+                    Footing (15%)</span>
+                  <span id="milePlinth" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">3. Ground
+                    Slab (15%)</span>
+                  <span id="mileGroundSlab" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">4. Upper
+                    Slab/Lintel (15%)</span>
+                  <span id="mileFirstSlab" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">5. Brick &
+                    Plaster (15%)</span>
+                  <span id="mileBrick" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">6. Finishes
+                    &
+                    MEP (20%)</span>
+                  <span id="mileFinish" class="font-bold font-mono text-slate-900 dark:text-white">PKR 0</span>
+                </div>
+                <div
+                  class="p-2.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 col-span-1 sm:col-span-2">
+                  <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-semibold">7. Final
+                    Snag
+                    Clearance & Handover (10%)</span>
+                  <span id="mileHandover" class="font-bold font-mono text-emerald-500 dark:text-emerald-400">PKR
+                    0</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project Specification Snapshot Tags -->
+            <div
+              class="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 bg-slate-100 dark:bg-slate-800/60 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
+              <div>
+                <span
+                  class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-medium">Jurisdiction</span>
+                <span id="snapAuthority" class="font-semibold text-slate-800 dark:text-slate-200">DHA Lahore</span>
+              </div>
+              <div>
+                <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-medium">Foundation
+                  Soil</span>
+                <span id="snapFoundation" class="font-semibold text-slate-800 dark:text-slate-200">Normal Pad</span>
+              </div>
+              <div>
+                <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-medium">Target
+                  Schedule</span>
+                <span id="snapTimeline" class="font-semibold text-slate-800 dark:text-slate-200">12 Months</span>
+              </div>
+              <div>
+                <span class="text-slate-400 dark:text-slate-500 block text-[10px] uppercase font-medium">Material
+                  Std.</span>
+                <span id="snapMaterial" class="font-semibold text-slate-800 dark:text-slate-200">Class A</span>
+              </div>
+            </div>
+
+            <!-- PRINT-ONLY SIGNATURE & DISCLAIMER BLOCK -->
+            <div class="hidden print:block pt-6 border-t-2 border-slate-900 mt-6">
+              <div class="grid grid-cols-2 gap-10 mb-6 text-xs">
+                <div>
+                  <div class="font-bold text-slate-900 uppercase tracking-wider mb-6">Prepared By (Pre-Con Estimator):
+                  </div>
+                  <div class="border-b border-slate-400 pb-1 font-semibold text-slate-800">Plan.B Automated Engineering
+                    Engine v4.2</div>
+                  <div class="text-[10px] text-slate-500 mt-1">System Verified Takeoff</div>
+                </div>
+                <div>
+                  <div class="font-bold text-slate-900 uppercase tracking-wider mb-6">Client / Authorized Signatory:
+                  </div>
+                  <div class="border-b border-slate-400 pb-1 font-semibold text-slate-400">Signature & Official Stamp
+                  </div>
+                  <div class="text-[10px] text-slate-500 mt-1">Acceptance & Scope Authorization</div>
+                </div>
+              </div>
+              <p class="text-[10px] text-slate-500 leading-normal italic text-center">
+                Notice: This document constitutes an automated pre-construction cost takeoff based on municipal building
+                bylaws in Pakistan. Final architectural working drawings, geotechnical soil investigations, and signed
+                contracts supersede this preliminary report.
+              </p>
+            </div>
+          </div>
+
+          <!-- Action Footer Navigation -->
+          <footer class="pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-between items-center mt-6">
+            <button type="button" id="btnPrev" onclick="navigateStep(-1)"
+              class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-50 dark:bg-slate-800 font-medium text-xs transition opacity-0 pointer-events-none">
+              Back
+            </button>
+
+            <div class="flex gap-2">
+              <button type="button" id="btnRestart" onclick="restartWizard()"
+                class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-50 dark:bg-slate-800 font-medium text-xs transition hidden">
+                New Estimation
+              </button>
+              <button type="button" id="btnNext" onclick="navigateStep(1)"
+                class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs transition shadow-md shadow-amber-500/20">
+                Continue
+              </button>
+            </div>
+          </footer>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="liquid-glass-footer py-8 sm:py-10 px-6 transition-colors duration-200 relative z-10">
+      <div class="max-w-[1700px] mx-auto px-2 lg:px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        <!-- Footer Logo -->
+        <div class="flex items-center gap-3.5">
+          <img src="logo.png" alt="Plan.B Logo"
+            class="h-12 sm:h-14 w-auto object-contain dark:brightness-0 dark:invert">
+          <div class="leading-none flex flex-col justify-center">
+            <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+              PLAN<span class="text-amber-500">.B</span>
+            </span>
+            <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+              Engineering Solutions
+            </span>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mt-2 leading-tight">Heavy Infrastructure & Commercial
+              Development.</p>
+          </div>
+        </div>
+
+        <!-- Quick Nav Links in Footer -->
+        <div class="flex flex-wrap gap-6 lg:gap-10 text-xs text-slate-600 dark:text-slate-400">
+          <a href="index.html" class="hover:text-amber-500 transition-colors">Home</a>
+          <a href="about.html" class="hover:text-amber-500 transition-colors">About Us</a>
+          <a href="services.html" class="hover:text-amber-500 transition-colors">Services</a>
+          <a href="projects.html" class="hover:text-amber-500 transition-colors">Projects</a>
+          <a href="contact.html" class="hover:text-amber-500 transition-colors">Contact & Map</a>
+        </div>
+
+        <!-- Footer Social Presence -->
+        <div class="flex items-center space-x-3">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+          <button type="button" aria-label="Share Link"
+            class="copy-link-btn w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+              </path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="text-slate-400 dark:text-slate-500 text-xs text-center md:text-right space-y-1">
+          <div>&copy; 2026 Plan.B Engineering Solutions. All rights reserved.</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">
+            Developed by <a href="https://pk.linkedin.com/in/hixzi" target="_blank" rel="noopener noreferrer"
+              class="font-medium text-slate-700 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-500 transition-colors">Muhammad
+              Salman</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div><!-- /#pageContent -->
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Theme Setup
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const sunIcon = document.getElementById('sunIcon');
+      const moonIcon = document.getElementById('moonIcon');
+
+      function updateIcons(isDark) {
+        if (sunIcon && moonIcon) {
+          if (isDark) { sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden'); }
+          else { sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden'); }
+        }
+      }
+
+      updateIcons(html.classList.contains('dark'));
+      if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+          const isDark = html.classList.toggle('dark');
+          localStorage.setItem('apex_theme', isDark ? 'dark' : 'light');
+          updateIcons(isDark);
+          document.querySelectorAll('input[type=range]').forEach(updateSliderTrackProgress);
+        });
+      }
+
+      // HEADER BOTTOM OUTLINE SCROLL PROGRESS ANIMATION
+      function updateHeaderProgress() {
+        const progressBar = document.getElementById('headerScrollProgress');
+        if (!progressBar) return;
+        const winScroll = window.scrollY || document.documentElement.scrollTop || 0;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct = height > 0 ? (winScroll / height) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+      }
+      window.addEventListener('scroll', updateHeaderProgress, { passive: true });
+      window.addEventListener('resize', updateHeaderProgress, { passive: true });
+      document.addEventListener('DOMContentLoaded', updateHeaderProgress);
+      updateHeaderProgress();
+
+      // 2. Mobile Menu Setup
+      const mobileBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileBackdrop = document.getElementById('mobileMenuBackdrop');
+      const burger = document.getElementById('menuBurger');
+      const close = document.getElementById('menuClose');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+      const mobileSearch = document.getElementById('mobileSearchInput');
+
+      function toggleMobileMenu(open) {
+        if (!mobileMenu) return;
+        const isOpen = open !== undefined ? open : mobileMenu.classList.contains('hidden');
+        if (isOpen) {
+          mobileMenu.classList.remove('hidden');
+          if (mobileBackdrop) mobileBackdrop.classList.remove('hidden');
+          if (burger) burger.classList.add('hidden');
+          if (close) close.classList.remove('hidden');
+        } else {
+          mobileMenu.classList.add('hidden');
+          if (mobileBackdrop) mobileBackdrop.classList.add('hidden');
+          if (burger) burger.classList.remove('hidden');
+          if (close) close.classList.add('hidden');
+        }
+      }
+
+      if (mobileBtn) mobileBtn.addEventListener('click', () => toggleMobileMenu());
+      if (mobileBackdrop) mobileBackdrop.addEventListener('click', () => toggleMobileMenu(false));
+      mobileLinks.forEach(l => l.addEventListener('click', () => toggleMobileMenu(false)));
+
+      if (mobileSearch) {
+        mobileSearch.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          mobileLinks.forEach(link => {
+            const text = link.textContent.toLowerCase();
+            link.style.display = text.includes(query) ? 'block' : 'none';
+          });
+        });
+      }
+
+      // 3. Copy Link Toast Notification
+      function showCopyToast() {
+        let toast = document.getElementById('copyToastNotification');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'copyToastNotification';
+          toast.className = 'fixed bottom-6 right-6 z-50 bg-slate-900/95 dark:bg-slate-800/95 text-white text-xs font-semibold px-4 py-3 rounded-xl border border-slate-700 shadow-xl flex items-center gap-2.5 transition-all duration-300 opacity-0 transform translate-y-4 pointer-events-none backdrop-blur-md';
+          toast.innerHTML = `
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Link copied to clipboard! Share anywhere.</span>
+          `;
+          document.body.appendChild(toast);
+        }
+
+        toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+
+        setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        }, 2600);
+      }
+
+      document.querySelectorAll('.copy-link-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const currentUrl = window.location.origin + window.location.pathname;
+          try {
+            await navigator.clipboard.writeText(currentUrl);
+          } catch (err) {
+            const tempInput = document.createElement('input');
+            tempInput.value = currentUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+          }
+
+          const originalSvg = btn.innerHTML;
+          btn.innerHTML = `
+            <svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+            </svg>
+          `;
+
+          showCopyToast();
+
+          setTimeout(() => {
+            btn.innerHTML = originalSvg;
+          }, 2000);
+        });
+      });
+    });
+
+    // 4. CALCULATOR WIZARD ENGINE
+    let currentStep = 1;
+    const totalSteps = 7;
+
+    const wizardState = {
+      landType: 'residential',
+      authority: 'dha_lahore',
+      foundation: 'strip',
+      areaUnit: 'marla',
+      areaValue: 10,
+      isCustomArea: false,
+      sliderIndex: 3,
+      floors: 2,
+      basement: 'full',
+      hasMezzanine: false,
+      materialTier: 'classA',
+      wageMistri: 2600,
+      wageHelper: 1600,
+      crewMistri: 4,
+      crewHelper: 8,
+      timelineMonths: 12,
+      escalationPct: 8.0,
+      contractorPct: 12.0
+    };
+
+    const AUTHORITY_RATES = {
+      dha_lahore: { fee: 650000, label: "DHA Lahore (High Scrutiny & Vetting)", text: "Strict non-daytime concrete mixing, possession inspection deposits, and vetted architectural requirements." },
+      lda_lahore: { fee: 350000, label: "LDA Lahore (Standard Municipal)", text: "LDA map sanctioning, commercial conversion fee checks, and WASA temporary connection charges." },
+      isb_cda: { fee: 550000, label: "CDA Islamabad (Earthquake Zone 2B)", text: "Mandatory structural vetting by certified engineer, CDA scrutiny fee, and environmental compliance." },
+      isb_bahria: { fee: 450000, label: "Bahria Town / DHA Rawalpindi", text: "Society maintenance deposits, road cutting charges, and temporary water boring permissions." },
+      karachi_dha: { fee: 750000, label: "Karachi DHA / Clifton", text: "Coastal marine grade sulfate-resistant cement requirements, subsoil salinity barrier vetting." },
+      general_pk: { fee: 250000, label: "General Municipal Body / Private Town", text: "Standard Tehsil Municipal Administration (TMA) map approval and possession issuance fee." }
+    };
+
+    const UNIT_PRESETS = {
+      marla: { values: [3, 5, 7, 10, 20], defaultIndex: 3, sqftPerUnit: 225 },
+      kanal: { values: [2, 4, 6, 8, 10], defaultIndex: 0, sqftPerUnit: 4500 },
+      acre: { values: [3, 5, 7, 9, 12], defaultIndex: 0, sqftPerUnit: 43560 },
+      sqft: { min: 500, max: 30000, step: 250, defaultVal: 2250, sqftPerUnit: 1 }
+    };
+
+    function updateSliderTrackProgress(slider) {
+      if (!slider) return;
+      const min = parseFloat(slider.min) || 0;
+      const max = parseFloat(slider.max) || 100;
+      const val = parseFloat(slider.value) || 0;
+      const pct = max > min ? ((val - min) / (max - min)) * 100 : 0;
+      const isDark = document.documentElement.classList.contains('dark');
+      const bgTrack = isDark ? '#334155' : '#e2e8f0';
+      slider.style.background = `linear-gradient(to right, #f59e0b ${pct}%, ${bgTrack} ${pct}%)`;
+    }
+
+    function updateStepUI() {
+      for (let i = 1; i <= totalSteps; i++) {
+        document.getElementById(`step-${i}`).classList.add('hidden');
+      }
+      document.getElementById('step-results').classList.add('hidden');
+
+      const btnPrev = document.getElementById('btnPrev');
+      const btnNext = document.getElementById('btnNext');
+      const btnRestart = document.getElementById('btnRestart');
+      const badge = document.getElementById('stepCounterBadge');
+      const progressBar = document.getElementById('progressBar');
+
+      if (currentStep <= totalSteps) {
+        document.getElementById(`step-${currentStep}`).classList.remove('hidden');
+        badge.innerText = `${currentStep} of ${totalSteps}`;
+        progressBar.style.width = `${(currentStep / totalSteps) * 100}%`;
+
+        btnNext.innerText = currentStep === totalSteps ? 'Calculate Final BOQ' : 'Continue';
+        btnNext.classList.remove('hidden');
+        btnRestart.classList.add('hidden');
+
+        if (currentStep > 1) {
+          btnPrev.classList.remove('opacity-0', 'pointer-events-none');
+        } else {
+          btnPrev.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        setTimeout(() => {
+          document.querySelectorAll(`#step-${currentStep} input[type=range]`).forEach(updateSliderTrackProgress);
+        }, 10);
+      } else {
+        document.getElementById('step-results').classList.remove('hidden');
+        badge.innerText = 'Completed';
+        progressBar.style.width = '100%';
+        btnPrev.classList.remove('opacity-0', 'pointer-events-none');
+        btnNext.classList.add('hidden');
+        btnRestart.classList.remove('hidden');
+        computeResults();
+      }
+    }
+
+    function navigateStep(delta) {
+      currentStep += delta;
+      if (currentStep < 1) currentStep = 1;
+      updateStepUI();
+    }
+
+    function restartWizard() {
+      currentStep = 1;
+      updateStepUI();
+    }
+
+    function updateRadioSelection(name) {
+      const val = document.querySelector(`input[name="${name}"]:checked`).value;
+      if (name === 'landType') {
+        wizardState.landType = val;
+        ['residential', 'commercial', 'industrial'].forEach(t => {
+          const card = document.getElementById(`card-land-${t}`);
+          card.className = t === val
+            ? "cursor-pointer border-2 border-amber-500 bg-amber-500/10 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition shadow-md shadow-amber-500/10"
+            : "cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5";
+        });
+        applyZoningRules();
+      } else if (name === 'materialTier') {
+        wizardState.materialTier = val;
+        ['classA', 'classB', 'custom'].forEach(m => {
+          const card = document.getElementById(`card-mat-${m}`);
+          card.className = m === val
+            ? "cursor-pointer border-2 border-amber-500 bg-amber-500/10 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition shadow-md shadow-amber-500/10"
+            : "cursor-pointer border-2 border-slate-200/80 dark:border-slate-800/80 bg-white/40 dark:bg-slate-900/40 backdrop-blur-md rounded-xl p-4 flex flex-col justify-between h-full transition hover:border-amber-500/50 hover:bg-amber-500/5";
+        });
+
+        const customDrawer = document.getElementById('customTraderDrawer');
+        if (val === 'custom') {
+          customDrawer.classList.remove('hidden');
+        } else {
+          customDrawer.classList.add('hidden');
+        }
+      }
+    }
+
+    function updateAuthorityParams() {
+      const sel = document.getElementById('selAuthority').value;
+      wizardState.authority = sel;
+      const note = document.getElementById('authorityNote');
+      if (AUTHORITY_RATES[sel]) {
+        note.innerText = AUTHORITY_RATES[sel].text;
+      }
+    }
+
+    function applyZoningRules() {
+      const type = wizardState.landType;
+      const slider = document.getElementById('floorsSlider');
+      const maxLabel = document.getElementById('maxFloorLabel');
+      const hint = document.getElementById('step3Hint');
+      const mezWrapper = document.getElementById('mezzanineOptionWrapper');
+
+      if (type === 'residential') {
+        slider.max = 4;
+        maxLabel.innerText = 'Max (4)';
+        hint.innerText = 'Residential zoning allows up to 4 storeys (G+3).';
+        mezWrapper.classList.add('hidden');
+        document.getElementById('chkMezzanine').checked = false;
+        if (wizardState.floors > 4) wizardState.floors = 4;
+      } else if (type === 'commercial') {
+        slider.max = 18;
+        maxLabel.innerText = 'Max (18)';
+        hint.innerText = 'Commercial zoning allows multistory retail/office plazas up to 18 storeys with mezzanine floors.';
+        mezWrapper.classList.remove('hidden');
+      } else {
+        slider.max = 50;
+        maxLabel.innerText = 'Custom';
+        hint.innerText = 'Industrial zoning permits tailored vertical heights for warehouses and production units.';
+        mezWrapper.classList.remove('hidden');
+      }
+
+      slider.value = wizardState.floors;
+      onFloorSliderMove(wizardState.floors);
+      updateSliderTrackProgress(slider);
+    }
+
+    function setAreaUnit(unit) {
+      wizardState.areaUnit = unit;
+      ['marla', 'kanal', 'acre', 'sqft'].forEach(u => {
+        const btn = document.getElementById(`tab-unit-${u}`);
+        btn.className = u === unit
+          ? "px-3.5 py-1.5 rounded-md bg-amber-500 text-slate-950 font-bold shadow-sm transition"
+          : "px-3.5 py-1.5 rounded-md text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition";
+      });
+
+      document.getElementById('customUnitBadge').innerText = unit.toUpperCase();
+      toggleCustomArea(false);
+      renderAreaSlider();
+    }
+
+    function renderAreaSlider() {
+      const slider = document.getElementById('unitRangeSlider');
+      const ticks = document.getElementById('sliderTicksRow');
+      ticks.innerHTML = '';
+
+      if (wizardState.areaUnit === 'sqft') {
+        slider.min = UNIT_PRESETS.sqft.min;
+        slider.max = UNIT_PRESETS.sqft.max;
+        slider.step = UNIT_PRESETS.sqft.step;
+        slider.value = UNIT_PRESETS.sqft.defaultVal;
+        wizardState.areaValue = UNIT_PRESETS.sqft.defaultVal;
+
+        ticks.innerHTML = `
+          <span>500 sq. ft</span>
+          <span>10,000</span>
+          <span>20,000</span>
+          <span>30,000 sq. ft</span>
+        `;
+      } else {
+        const config = UNIT_PRESETS[wizardState.areaUnit];
+        slider.min = 0;
+        slider.max = config.values.length - 1;
+        slider.step = 1;
+        slider.value = config.defaultIndex;
+        wizardState.sliderIndex = config.defaultIndex;
+        wizardState.areaValue = config.values[wizardState.sliderIndex];
+
+        config.values.forEach(val => {
+          const span = document.createElement('span');
+          span.innerText = `${val}`;
+          ticks.appendChild(span);
+        });
+      }
+
+      updateAreaDisplays();
+      updateSliderTrackProgress(slider);
+    }
+
+    function onSliderMove(val) {
+      const slider = document.getElementById('unitRangeSlider');
+      if (wizardState.areaUnit === 'sqft') {
+        wizardState.areaValue = parseFloat(val);
+      } else {
+        wizardState.sliderIndex = parseInt(val);
+        wizardState.areaValue = UNIT_PRESETS[wizardState.areaUnit].values[wizardState.sliderIndex];
+      }
+      updateAreaDisplays();
+      updateSliderTrackProgress(slider);
+    }
+
+    function toggleCustomArea(isCustom) {
+      wizardState.isCustomArea = isCustom;
+      const sSection = document.getElementById('sliderAreaSection');
+      const cSection = document.getElementById('customAreaSection');
+
+      if (isCustom) {
+        sSection.classList.add('hidden');
+        cSection.classList.remove('hidden');
+        document.getElementById('customNumberInput').value = wizardState.areaValue;
+        document.getElementById('customInputLabel').innerText = `Enter Exact ${wizardState.areaUnit.toUpperCase()} Value`;
+      } else {
+        cSection.classList.add('hidden');
+        sSection.classList.remove('hidden');
+        renderAreaSlider();
+      }
+    }
+
+    function onCustomNumberInput(val) {
+      wizardState.areaValue = Math.max(parseFloat(val) || 0, 0);
+      updateAreaDisplays();
+    }
+
+    function getPlotFootprintSqft() {
+      if (wizardState.areaUnit === 'sqft') return wizardState.areaValue;
+      return wizardState.areaValue * UNIT_PRESETS[wizardState.areaUnit].sqftPerUnit;
+    }
+
+    function updateAreaDisplays() {
+      const footprint = getPlotFootprintSqft();
+      const unitLabel = wizardState.areaUnit.charAt(0).toUpperCase() + wizardState.areaUnit.slice(1);
+      document.getElementById('sliderDisplayLabel').innerText = `${wizardState.areaValue.toLocaleString()} ${unitLabel}`;
+      document.getElementById('sliderFootprintBadge').innerText = `Footprint: ${Math.round(footprint).toLocaleString()} sq. ft`;
+    }
+
+    function onFloorSliderMove(val) {
+      const slider = document.getElementById('floorsSlider');
+      wizardState.floors = parseInt(val);
+      document.getElementById('displayFloors').innerText = `${wizardState.floors} Floor${wizardState.floors > 1 ? 's' : ''}`;
+      updateSliderTrackProgress(slider);
+    }
+
+    function resetTraderDefaults() {
+      document.getElementById('tradeSteel').value = 265000;
+      document.getElementById('tradeCement').value = 1420;
+      document.getElementById('tradeBricks').value = 13500;
+      document.getElementById('tradeCrush').value = 135;
+      document.getElementById('tradeSand').value = 48;
+      document.getElementById('tradeFinish').value = 3800;
+    }
+
+    function updateCrewDisplay() {
+      const m = parseInt(document.getElementById('crewMistriCount').value) || 0;
+      const h = parseInt(document.getElementById('crewHelperCount').value) || 0;
+      const wm = parseFloat(document.getElementById('wageMistri').value) || 0;
+      const wh = parseFloat(document.getElementById('wageHelper').value) || 0;
+
+      wizardState.crewMistri = m;
+      wizardState.crewHelper = h;
+      wizardState.wageMistri = wm;
+      wizardState.wageHelper = wh;
+
+      const totalWorkers = m + h;
+      const dailyPayroll = (m * wm) + (h * wh);
+
+      document.getElementById('badgeTotalCrew').innerText = `${totalWorkers} Workers`;
+      document.getElementById('dailyPayrollBadge').innerText = `PKR ${Math.round(dailyPayroll).toLocaleString('en-PK')} / day`;
+    }
+
+    function onTimelineMove(months) {
+      const slider = document.getElementById('sliderTimeline');
+      wizardState.timelineMonths = parseInt(months);
+      const workingDays = wizardState.timelineMonths * 25;
+      document.getElementById('displayDurationLabel').innerText = `${wizardState.timelineMonths} Months (${workingDays} Working Days)`;
+
+      let surcharge = 0;
+      let label = "0.0% (Optimal Schedule)";
+
+      if (wizardState.timelineMonths <= 6) {
+        surcharge = 14.0;
+        label = "+14.0% (Fast-Track / Double Shifts)";
+      } else if (wizardState.timelineMonths <= 9) {
+        surcharge = 7.5;
+        label = "+7.5% (Accelerated Overtime)";
+      } else if (wizardState.timelineMonths > 16) {
+        surcharge = 3.5;
+        label = "+3.5% (Extended Site Overhead)";
+      }
+
+      wizardState.speedSurchargePct = surcharge;
+      document.getElementById('badgeDemandSurcharge').innerText = label;
+      updateSliderTrackProgress(slider);
+    }
+
+    function onBufferMove() {
+      const sEsc = document.getElementById('sliderEscalation');
+      const sCont = document.getElementById('sliderContractor');
+
+      let esc = parseFloat(sEsc.value) || 8;
+      let cont = parseFloat(sCont.value) || 12;
+
+      esc = Math.min(Math.max(esc, 7.0), 10.0);
+      cont = Math.min(Math.max(cont, 10.0), 15.0);
+
+      wizardState.escalationPct = esc;
+      wizardState.contractorPct = cont;
+
+      document.getElementById('badgeEscValue').innerText = `${esc.toFixed(1)}%`;
+      document.getElementById('badgeContValue').innerText = `${cont.toFixed(1)}%`;
+
+      updateSliderTrackProgress(sEsc);
+      updateSliderTrackProgress(sCont);
+    }
+
+    function numberToWordsPKR(amount) {
+      const num = Math.round(amount);
+      if (num === 0) return 'Zero Rupees Only';
+
+      const ones = ['', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen'];
+      const tens = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
+
+      function convertChunk(n) {
+        let str = '';
+        if (n >= 100) {
+          str += ones[Math.floor(n / 100)] + ' Hundred ';
+          n %= 100;
+        }
+        if (n >= 20) {
+          str += tens[Math.floor(n / 10)] + ' ';
+          n %= 10;
+        }
+        if (n > 0) {
+          str += ones[n] + ' ';
+        }
+        return str.trim();
+      }
+
+      let result = '';
+      let crore = Math.floor(num / 10000000);
+      let remainder = num % 10000000;
+      let lakh = Math.floor(remainder / 100000);
+      remainder %= 100000;
+      let thousand = Math.floor(remainder / 1000);
+      remainder %= 1000;
+
+      if (crore > 0) {
+        result += convertChunk(crore) + ' Crore ';
+      }
+      if (lakh > 0) {
+        result += convertChunk(lakh) + ' Lakh ';
+      }
+      if (thousand > 0) {
+        result += convertChunk(thousand) + ' Thousand ';
+      }
+      if (remainder > 0) {
+        result += convertChunk(remainder) + ' ';
+      }
+
+      return result.trim() + ' Rupees Only';
+    }
+
+    let computedSummary = {};
+
+    function computeResults() {
+      wizardState.authority = document.getElementById('selAuthority').value;
+      wizardState.foundation = document.getElementById('selFoundation').value;
+      wizardState.basement = document.getElementById('selBasement').value;
+      wizardState.hasMezzanine = document.getElementById('chkMezzanine').checked && wizardState.landType !== 'residential';
+      updateCrewDisplay();
+
+      const footprint = getPlotFootprintSqft();
+      const coverageRatio = wizardState.landType === 'industrial' ? 0.65 : (footprint > 4500 ? 0.75 : 0.85);
+      const groundCoveredSqft = footprint * coverageRatio;
+
+      let aboveGroundSqft = groundCoveredSqft * wizardState.floors;
+      if (wizardState.hasMezzanine) {
+        aboveGroundSqft += (groundCoveredSqft * 0.60);
+      }
+
+      let basementSqft = 0;
+      if (wizardState.basement === 'partial') basementSqft = groundCoveredSqft * 0.50;
+      if (wizardState.basement === 'full') basementSqft = groundCoveredSqft * 1.0;
+
+      const totalCoveredSqft = aboveGroundSqft + basementSqft;
+
+      // 1. Material Computation
+      let baseMaterialSqftRate = 5200;
+      if (wizardState.materialTier === 'classB') baseMaterialSqftRate = 4100;
+      if (wizardState.materialTier === 'custom') {
+        const s = parseFloat(document.getElementById('tradeSteel').value) || 265000;
+        const c = parseFloat(document.getElementById('tradeCement').value) || 1420;
+        const b = parseFloat(document.getElementById('tradeBricks').value) || 13500;
+        const cr = parseFloat(document.getElementById('tradeCrush').value) || 135;
+        const sa = parseFloat(document.getElementById('tradeSand').value) || 48;
+        const fn = parseFloat(document.getElementById('tradeFinish').value) || 3800;
+
+        baseMaterialSqftRate = ((s / 1000) * 4.5) + (c * 0.35) + ((b / 1000) * 24) + (cr * 1.25) + (sa * 1.75) + fn;
+      }
+
+      const zoningMult = wizardState.landType === 'commercial' ? 1.25 : (wizardState.landType === 'industrial' ? 1.18 : 1.0);
+      baseMaterialSqftRate *= zoningMult;
+
+      const materialCost = aboveGroundSqft * baseMaterialSqftRate;
+
+      // 2. Foundation Soil Surcharge
+      let foundationMultiplier = 0.0;
+      if (wizardState.foundation === 'raft') foundationMultiplier = 0.18;
+      if (wizardState.foundation === 'piling') foundationMultiplier = 0.28;
+      const foundationCost = (groundCoveredSqft * (baseMaterialSqftRate * 0.45)) * foundationMultiplier;
+
+      // 3. Labour Computation
+      const workingDays = wizardState.timelineMonths * 25;
+      const dailyCrewPayroll = (wizardState.crewMistri * wizardState.wageMistri) + (wizardState.crewHelper * wizardState.wageHelper);
+      const labourCost = dailyCrewPayroll * workingDays;
+
+      // 4. Basement Cost
+      let basementCost = 0;
+      if (basementSqft > 0) {
+        basementCost = basementSqft * ((baseMaterialSqftRate * 1.35) + 800);
+      }
+
+      // 5. Authority Approvals & Temporary Utilities
+      const authorityDues = AUTHORITY_RATES[wizardState.authority].fee;
+
+      // 6. Urgency Surcharge
+      const coreDirectCost = materialCost + foundationCost + labourCost + basementCost + authorityDues;
+      const speedCost = coreDirectCost * ((wizardState.speedSurchargePct || 0) / 100);
+      const adjustedDirect = coreDirectCost + speedCost;
+
+      // 7. Protected Buffers
+      const escalationCost = adjustedDirect * (wizardState.escalationPct / 100);
+      const subtotalWithEsc = adjustedDirect + escalationCost;
+      const contractorProfit = subtotalWithEsc * (wizardState.contractorPct / 100);
+      const grandTotal = subtotalWithEsc + contractorProfit;
+
+      const effectiveUnitRate = totalCoveredSqft > 0 ? (grandTotal / totalCoveredSqft) : 0;
+
+      computedSummary = {
+        grandTotal,
+        effectiveUnitRate,
+        totalCoveredSqft,
+        aboveGroundSqft,
+        materialCost,
+        labourCost,
+        foundationCost,
+        basementCost,
+        authorityDues,
+        speedCost,
+        escalationCost,
+        contractorProfit
+      };
+
+      const fmt = (n) => 'PKR ' + Math.round(n).toLocaleString('en-PK');
+
+      document.getElementById('resGrandTotal').innerText = fmt(grandTotal);
+      document.getElementById('resEffectiveRate').innerText = `${fmt(effectiveUnitRate)} / sq. ft`;
+      document.getElementById('resTotalCoveredArea').innerText = `Covered Area: ${Math.round(totalCoveredSqft).toLocaleString()} sq. ft`;
+
+      let readableDenom = '';
+      if (grandTotal >= 10000000) {
+        readableDenom = `≈ ${(grandTotal / 10000000).toFixed(2)} Crore PKR`;
+      } else if (grandTotal >= 100000) {
+        readableDenom = `≈ ${(grandTotal / 100000).toFixed(2)} Lakh PKR`;
+      }
+      document.getElementById('resCroreLakh').innerText = readableDenom;
+
+      document.getElementById('resBasisMaterials').innerText = `${Math.round(aboveGroundSqft).toLocaleString()} sq. ft framing`;
+      document.getElementById('resAmountMaterials').innerText = fmt(materialCost);
+
+      document.getElementById('resBasisLabour').innerText = `${wizardState.crewMistri + wizardState.crewHelper} crew @ ${workingDays} days`;
+      document.getElementById('resAmountLabour').innerText = fmt(labourCost);
+
+      document.getElementById('resBasisFoundation').innerText = wizardState.foundation === 'strip' ? 'Standard strip footing (0% surcharge)' : (wizardState.foundation === 'raft' ? 'Heavy Raft slab (+18% steel/concrete)' : 'Deep Bored Piling (+28%)');
+      document.getElementById('resAmountFoundation').innerText = fmt(foundationCost);
+
+      document.getElementById('resBasisBasement').innerText = basementSqft > 0 ? `${Math.round(basementSqft).toLocaleString()} sq. ft RCC retaining walls` : 'None';
+      document.getElementById('resAmountBasement').innerText = fmt(basementCost);
+
+      document.getElementById('resBasisAuthority').innerText = `${AUTHORITY_RATES[wizardState.authority].label}`;
+      document.getElementById('resAmountAuthority').innerText = fmt(authorityDues);
+
+      document.getElementById('resBasisSpeed').innerText = `${(wizardState.speedSurchargePct || 0).toFixed(1)}% schedule surcharge`;
+      document.getElementById('resAmountSpeed').innerText = fmt(speedCost);
+
+      document.getElementById('resBasisEscalation').innerText = `${wizardState.escalationPct.toFixed(1)}% contractual buffer`;
+      document.getElementById('resAmountEscalation').innerText = fmt(escalationCost);
+
+      document.getElementById('resBasisMargin').innerText = `${wizardState.contractorPct.toFixed(1)}% contractor fee`;
+      document.getElementById('resAmountMargin').innerText = fmt(contractorProfit);
+
+      // Milestone Breakdown
+      document.getElementById('mileAdvance').innerText = fmt(grandTotal * 0.10);
+      document.getElementById('milePlinth').innerText = fmt(grandTotal * 0.15);
+      document.getElementById('mileGroundSlab').innerText = fmt(grandTotal * 0.15);
+      document.getElementById('mileFirstSlab').innerText = fmt(grandTotal * 0.15);
+      document.getElementById('mileBrick').innerText = fmt(grandTotal * 0.15);
+      document.getElementById('mileFinish').innerText = fmt(grandTotal * 0.20);
+      document.getElementById('mileHandover').innerText = fmt(grandTotal * 0.10);
+
+      // Snapshot tags
+      document.getElementById('snapAuthority').innerText = AUTHORITY_RATES[wizardState.authority].label.split(' ')[0] + ' ' + AUTHORITY_RATES[wizardState.authority].label.split(' ')[1];
+      document.getElementById('snapFoundation').innerText = wizardState.foundation.toUpperCase();
+      document.getElementById('snapTimeline').innerText = `${wizardState.timelineMonths} Months`;
+      document.getElementById('snapMaterial').innerText = wizardState.materialTier === 'classA' ? 'Class A' : (wizardState.materialTier === 'classB' ? 'Class B' : 'Custom');
+
+      // Populate Formal Corporate Print Report Elements
+      const setEl = (id, txt) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = txt;
+      };
+
+      if (!window._printReportRefCode) {
+        window._printReportRefCode = 'PLB-EST-' + Math.floor(100000 + Math.random() * 900000);
+      }
+      const todayStr = new Date().toLocaleDateString('en-PK', { year: 'numeric', month: 'long', day: 'numeric' });
+
+      setEl('formalReportRef', window._printReportRefCode);
+      setEl('formalReportDate', todayStr);
+
+      const zoneTitle = wizardState.landType.charAt(0).toUpperCase() + wizardState.landType.slice(1) + ` (${wizardState.floors} Storeys${wizardState.basement !== 'none' ? ' + ' + wizardState.basement.toUpperCase() + ' Bsm' : ''})`;
+      setEl('formalZoning', zoneTitle);
+      setEl('formalAuthority', AUTHORITY_RATES[wizardState.authority].label);
+      setEl('formalPlotSize', `${wizardState.areaValue} ${wizardState.areaUnit.toUpperCase()} (${Math.round(footprint).toLocaleString()} sq. ft)`);
+      setEl('formalCoveredArea', `${Math.round(totalCoveredSqft).toLocaleString()} sq. ft`);
+      setEl('formalFoundation', wizardState.foundation === 'strip' ? 'Standard Strip Footing' : (wizardState.foundation === 'raft' ? 'Heavy Raft Foundation' : 'Deep Bored Piling'));
+      setEl('formalMaterialTier', wizardState.materialTier === 'classA' ? 'Class A (Premium Grade)' : (wizardState.materialTier === 'classB' ? 'Class B (Standard Grade)' : 'Custom Trader Specs'));
+      setEl('formalTimeline', `${wizardState.timelineMonths} Months (${workingDays} Days)`);
+      setEl('formalCrew', `${wizardState.crewMistri + wizardState.crewHelper} Crew (${wizardState.crewMistri} Mistri, ${wizardState.crewHelper} Mazdoor)`);
+
+      setEl('formalGrandTotal', fmt(grandTotal));
+      setEl('formalWordsTotal', 'Amount in Words: ' + numberToWordsPKR(grandTotal));
+      setEl('formalUnitRate', `${fmt(effectiveUnitRate)} / sq. ft`);
+
+      const fmtRaw = (n) => Math.round(n).toLocaleString('en-PK');
+      setEl('formalBasisMat', `${Math.round(aboveGroundSqft).toLocaleString()} sq. ft framing`);
+      setEl('formalAmtMat', fmtRaw(materialCost));
+
+      setEl('formalBasisLab', `${wizardState.crewMistri + wizardState.crewHelper} crew @ ${workingDays} days`);
+      setEl('formalAmtLab', fmtRaw(labourCost));
+
+      setEl('formalBasisFnd', wizardState.foundation === 'strip' ? 'Standard strip footing (0% surcharge)' : (wizardState.foundation === 'raft' ? 'Heavy Raft slab (+18% steel/concrete)' : 'Deep Bored Piling (+28%)'));
+      setEl('formalAmtFnd', fmtRaw(foundationCost));
+
+      setEl('formalBasisBsm', basementSqft > 0 ? `${Math.round(basementSqft).toLocaleString()} sq. ft RCC retaining walls` : 'None');
+      setEl('formalAmtBsm', fmtRaw(basementCost));
+
+      setEl('formalBasisAut', AUTHORITY_RATES[wizardState.authority].label);
+      setEl('formalAmtAut', fmtRaw(authorityDues));
+
+      setEl('formalBasisSpd', `${(wizardState.speedSurchargePct || 0).toFixed(1)}% schedule surcharge`);
+      setEl('formalAmtSpd', fmtRaw(speedCost));
+
+      setEl('formalBasisEsc', `${wizardState.escalationPct.toFixed(1)}% contractual buffer`);
+      setEl('formalAmtEsc', fmtRaw(escalationCost));
+
+      setEl('formalBasisPrf', `${wizardState.contractorPct.toFixed(1)}% contractor fee`);
+      setEl('formalAmtPrf', fmtRaw(contractorProfit));
+
+      setEl('formalAmtTotal', fmtRaw(grandTotal));
+
+      setEl('fMile1', fmtRaw(grandTotal * 0.10));
+      setEl('fMile2', fmtRaw(grandTotal * 0.15));
+      setEl('fMile3', fmtRaw(grandTotal * 0.15));
+      setEl('fMile4', fmtRaw(grandTotal * 0.15));
+      setEl('fMile5', fmtRaw(grandTotal * 0.15));
+      setEl('fMile6', fmtRaw(grandTotal * 0.20));
+      setEl('fMile7', fmtRaw(grandTotal * 0.10));
+    }
+
+    function shareWhatsApp() {
+      if (!computedSummary.grandTotal) return;
+      const fmt = (n) => 'PKR ' + Math.round(n).toLocaleString('en-PK');
+
+      const text =
+        `*PROJECT CONSTRUCTION ESTIMATE*
+---------------------------------------
+• *Zoning:* ${wizardState.landType.toUpperCase()}
+• *Jurisdiction:* ${AUTHORITY_RATES[wizardState.authority].label}
+• *Plot Size:* ${wizardState.areaValue} ${wizardState.areaUnit.toUpperCase()}
+• *Total Covered Area:* ${Math.round(computedSummary.totalCoveredSqft).toLocaleString()} sq. ft
+• *Storeys:* ${wizardState.floors} Storeys ${wizardState.basement !== 'none' ? '+ ' + wizardState.basement.toUpperCase() + ' Basement' : ''}
+• *Target Duration:* ${wizardState.timelineMonths} Months
+
+*FINANCIAL SUMMARY:*
+• Materials: ${fmt(computedSummary.materialCost)}
+• Labour Payroll: ${fmt(computedSummary.labourCost)}
+• Foundation Engineering: ${fmt(computedSummary.foundationCost)}
+• Basement Substructure: ${fmt(computedSummary.basementCost)}
+• Approvals & Site Setup: ${fmt(computedSummary.authorityDues)}
+• Urgency & Speed Premium: ${fmt(computedSummary.speedCost)}
+• Price Escalation Buffer: ${fmt(computedSummary.escalationCost)}
+• Contractor Management: ${fmt(computedSummary.contractorProfit)}
+
+---------------------------------------
+*ESTIMATED GRAND TOTAL:* ${fmt(computedSummary.grandTotal)}
+*Composite Unit Rate:* ${fmt(computedSummary.effectiveUnitRate)} / sq. ft
+---------------------------------------
+_Generated via Pakistan Construction Feasibility Suite_`;
+
+      const encoded = encodeURIComponent(text);
+      window.open(`https://wa.me/?text=${encoded}`, '_blank');
+    }
+
+    // Initialize Default State
+    updateRadioSelection('landType');
+    updateRadioSelection('materialTier');
+    setAreaUnit('marla');
+    onFloorSliderMove(2);
+    onTimelineMove(12);
+    onBufferMove();
+    updateAuthorityParams();
+
+    document.querySelectorAll('input[type=range]').forEach(updateSliderTrackProgress);
+  </script>
+
+  <!-- PAGE TRANSITION ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const pageContent = document.getElementById('pageContent');
+      if (pageContent) {
+        requestAnimationFrame(() => {
+          pageContent.classList.add('page-loaded');
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:') || anchor.target === '_blank' || e.ctrlKey || e.metaKey) {
+          return;
+        }
+
+        const targetUrl = new URL(anchor.href, window.location.href);
+        if (targetUrl.origin === window.location.origin) {
+          if (targetUrl.pathname === window.location.pathname && targetUrl.hash) {
+            return;
+          }
+          e.preventDefault();
+          if (pageContent) {
+            pageContent.classList.remove('page-loaded');
+            pageContent.classList.add('page-exiting');
+          }
+          setTimeout(() => {
+            window.location.href = anchor.href;
+          }, 240);
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan.B Engineering Solutions | Commercial & Civil Infrastructure</title>
+
+  <!-- Prevent Theme Flash (Anti-FOUC) -->
+  <style>
+    html.dark {
+      background-color: #020617;
+      color: #f8fafc;
+    }
+
+    html:not(.dark) {
+      background-color: #f8fafc;
+      color: #020617;
+    }
+  </style>
+  <script>
+    (function () {
+      const saved = localStorage.getItem('apex_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- Static Compiled Tailwind CSS (0ms Load Time) -->
+  <link rel="stylesheet" href="output.css">
+
+  <style>
+    @keyframes grid-drift {
+      0% {
+        background-position: 0 0;
+      }
+
+      100% {
+        background-position: 40px 40px;
+      }
+    }
+
+    .bg-grid-animated {
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(148, 163, 184, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(148, 163, 184, 0.07) 1px, transparent 1px);
+      animation: grid-drift 25s linear infinite;
+    }
+
+    .dark .bg-grid-animated {
+      background-image:
+        linear-gradient(to right, rgba(245, 158, 11, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    }
+
+    @keyframes pulse-glow {
+
+      0%,
+      100% {
+        transform: scale(1) translate(0px, 0px);
+        opacity: 0.15;
+      }
+
+      50% {
+        transform: scale(1.15) translate(30px, -20px);
+        opacity: 0.25;
+      }
+    }
+
+    @keyframes pulse-glow-reverse {
+
+      0%,
+      100% {
+        transform: scale(1.1) translate(0px, 0px);
+        opacity: 0.12;
+      }
+
+      50% {
+        transform: scale(0.9) translate(-40px, 25px);
+        opacity: 0.22;
+      }
+    }
+
+    .animate-glow-1 {
+      animation: pulse-glow 14s ease-in-out infinite;
+    }
+
+    .animate-glow-2 {
+      animation: pulse-glow-reverse 18s ease-in-out infinite;
+    }
+
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+
+    .reveal-on-scroll.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .delay-100 {
+      transition-delay: 100ms;
+    }
+
+    .delay-200 {
+      transition-delay: 200ms;
+    }
+
+    .delay-300 {
+      transition-delay: 300ms;
+    }
+
+    /* Dynamic Left-to-Right Track Fill Slider Styling */
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 9999px;
+      background: linear-gradient(to right, #f59e0b 0%, #f59e0b var(--range-progress, 7%), #e2e8f0 var(--range-progress, 7%), #e2e8f0 100%);
+      outline: none;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .dark input[type=range] {
+      background: linear-gradient(to right, #f59e0b 0%, #f59e0b var(--range-progress, 7%), #1e293b var(--range-progress, 7%), #1e293b 100%);
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 2px solid #f59e0b;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      box-shadow: 0 0 12px rgba(245, 158, 11, 0.35);
+    }
+  </style>
+</head>
+
+<body
+  class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 transition-colors duration-200 relative overflow-x-hidden">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 liquid-glass-nav relative">
+    <div class="max-w-[1700px] mx-auto px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+
+      <!-- LOGO -->
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <img src="logo.png" alt="Plan.B Logo"
+          class="h-11 sm:h-12 md:h-13 w-auto object-contain dark:brightness-0 dark:invert transition-transform duration-300 group-hover:scale-105">
+        <div class="leading-none flex flex-col justify-center">
+          <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+            PLAN<span class="text-amber-500">.B</span>
+          </span>
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+            Engineering Solutions
+          </span>
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <div
+        class="hidden md:flex items-center space-x-8 lg:space-x-12 xl:space-x-16 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+        <a href="about.html" class="hover:text-slate-900 dark:hover:text-white transition">About Us</a>
+        <a href="services.html" class="hover:text-slate-900 dark:hover:text-white transition">Services</a>
+        <a href="calculator.html" class="hover:text-slate-900 dark:hover:text-white transition">Cost Estimator</a>
+        <a href="projects.html" class="hover:text-slate-900 dark:hover:text-white transition">Projects</a>
+        <a href="index.html#faq" class="hover:text-slate-900 dark:hover:text-white transition">FAQ</a>
+        <a href="contact.html" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+      </div>
+
+      <!-- Action Items & Mobile Menu Trigger -->
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" type="button" aria-label="Toggle Theme"
+          class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 dark:hover:text-amber-400 transition">
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.75"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="1.75"
+            viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <a href="calculator.html"
+          class="hidden sm:inline-flex items-center bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition shadow-md shadow-amber-500/20">
+          Estimate Project
+        </a>
+
+        <button id="mobileMenuBtn" type="button" aria-label="Toggle Menu"
+          class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+            <path id="menuBurger" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            <path id="menuClose" class="hidden" stroke-linecap="round" stroke-linejoin="round"
+              d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Backdrop -->
+    <div id="mobileMenuBackdrop" class="fixed inset-0 z-40 hidden md:hidden"></div>
+
+    <!-- Mobile Floating Popover Card -->
+    <div id="mobileMenu"
+      class="hidden md:hidden fixed top-24 right-4 sm:right-6 w-[calc(100vw-2rem)] max-w-xs sm:max-w-sm liquid-glass-card rounded-3xl p-5 shadow-2xl z-50 transition-all duration-200">
+      <div class="relative mb-3">
+        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </div>
+        <input type="text" id="mobileSearchInput" placeholder="SEARCH MENU..."
+          class="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition">
+      </div>
+
+      <div class="space-y-1 py-1" id="mobileNavItems">
+        <a href="about.html"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">About
+          Us</a>
+        <a href="services.html"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Services</a>
+        <a href="calculator.html"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Cost
+          Estimator</a>
+        <a href="projects.html"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Projects</a>
+        <a href="#faq"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">FAQ</a>
+        <a href="contact.html"
+          class="mobile-nav-link block px-3.5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Contact</a>
+      </div>
+
+      <div class="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <a href="calculator.html"
+          class="mobile-nav-link block text-center w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-widest py-3 rounded-xl transition shadow-md">
+          Estimate Project
+        </a>
+      </div>
+    </div>
+
+    <!-- Header Bottom Outline Scroll Progress Bar -->
+    <div
+      class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-slate-200/20 dark:bg-slate-800/40 pointer-events-none overflow-hidden z-50">
+      <div id="headerScrollProgress"
+        class="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.9)] transition-all duration-75"
+        style="width: 0%;"></div>
+    </div>
+  </nav>
+
+  <!-- WRAPPER FOR PAGE TRANSITIONS (STATIONARY NAVBAR) -->
+  <div id="pageContent" class="page-content-wrap">
+
+    <!-- HERO SECTION WITH PICTURE.PNG BACKGROUND -->
+    <section class="relative pt-24 pb-32 px-6 overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img src="picture.png" alt="Plan.B Architectural Construction Background"
+          class="w-full h-full object-cover object-center">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/80 to-slate-950/60 dark:from-slate-950/95 dark:via-slate-950/85 dark:to-slate-950/70">
+        </div>
+      </div>
+
+      <div class="absolute inset-0 bg-grid-animated pointer-events-none z-0 opacity-40"></div>
+      <canvas id="heroCanvas" class="absolute inset-0 pointer-events-none z-0 opacity-40 dark:opacity-30"></canvas>
+      <div
+        class="absolute top-1/4 right-0 w-[500px] h-[500px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none animate-glow-1 z-0">
+      </div>
+      <div
+        class="absolute bottom-10 left-10 w-[420px] h-[420px] bg-sky-500/10 dark:bg-amber-400/10 rounded-full blur-3xl pointer-events-none animate-glow-2 z-0">
+      </div>
+
+      <div class="relative z-10 max-w-7xl mx-auto">
+        <h1
+          class="reveal-on-scroll delay-100 text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight sm:leading-none mb-8 drop-shadow-md">
+          Precision Engineering. <br class="hidden sm:inline">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Uncompromising
+            Integrity.</span>
+        </h1>
+        <p
+          class="reveal-on-scroll delay-200 text-slate-200 text-lg sm:text-xl max-w-2xl leading-relaxed mb-10 drop-shadow">
+          When precision, deadlines, and flawless execution are paramount, Plan.B is the partner you count on.
+          Delivering
+          commercial hubs, civil works, and luxury residential developments on budget and ahead of schedule.
+        </p>
+        <div class="reveal-on-scroll delay-300 flex flex-wrap items-center gap-4">
+          <a href="#estimator"
+            class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-7 py-4 rounded-xl text-base transition shadow-lg shadow-amber-500/20 hover:-translate-y-0.5">
+            Calculate Project Cost
+          </a>
+          <a href="projects.html"
+            class="border border-slate-400 dark:border-slate-700 hover:border-white dark:hover:border-slate-500 bg-slate-900/60 backdrop-blur text-white font-semibold px-7 py-4 rounded-xl text-base transition hover:-translate-y-0.5">
+            View Master Portfolio
+          </a>
+        </div>
+
+        <!-- Quick Metrics Grid -->
+        <div
+          class="reveal-on-scroll delay-300 grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 pt-12 border-t border-slate-700/80">
+          <div>
+            <div class="text-3xl sm:text-4xl font-black text-white">
+              <span class="counter" data-target="18">0</span>+
+            </div>
+            <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Years Operating</div>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-black text-white">
+              $<span class="counter" data-target="450">0</span>M+
+            </div>
+            <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Capital Delivered</div>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-black text-white">
+              <span class="counter" data-target="100">0</span>%
+            </div>
+            <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">OSHA & Code Compliance</div>
+          </div>
+          <div>
+            <div class="text-3xl sm:text-4xl font-black text-white">
+              <span class="counter" data-target="280">0</span>+
+            </div>
+            <div class="text-xs uppercase tracking-wider text-slate-300 mt-1">Master Builders & Staff</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT US SECTION -->
+    <section id="about" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="grid lg:grid-cols-12 gap-12 items-center mb-20">
+
+        <!-- Left Visual & Experience Badge -->
+        <div class="reveal-on-scroll lg:col-span-6 relative">
+          <div class="relative rounded-3xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80"
+              alt="Plan.B Construction Engineers reviewing architectural blueprints on jobsite"
+              class="w-full h-[460px] object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+            <div
+              class="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur border border-slate-200 dark:border-slate-800">
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="text-xs text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
+                    Zero-Accident Benchmark</p>
+                  <p class="text-base font-bold text-slate-900 dark:text-white mt-0.5">3.2M Safe Work Hours Logged</p>
+                </div>
+                <div
+                  class="w-10 h-10 rounded-full bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold">
+                  ✓
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="absolute -bottom-6 -left-6 w-48 h-48 bg-amber-500/10 rounded-full blur-2xl -z-10 pointer-events-none animate-glow-2">
+          </div>
+        </div>
+
+        <!-- Right Narrative & Value Pillars -->
+        <div class="reveal-on-scroll delay-100 lg:col-span-6 space-y-6">
+          <div>
+            <span
+              class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">About
+              Plan.B</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4 leading-tight">
+              Built On Discipline, Backed By Science.
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-base leading-relaxed mt-4">
+              Founded with a commitment to industrial precision, Plan.B brings together civil engineers, master project
+              directors, and LEED-accredited architects. We eliminate contractor ambiguity through transparent
+              procurement, strict safety mandates, and data-backed cost controls.
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <div
+              class="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold shrink-0">
+                01</div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Value Engineering & BIM Modeling</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  Full 3D digital twins identify structural clashes before a single yard of concrete is poured, saving
+                  an
+                  average of 14% on total project cost.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex items-start gap-4 p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-sm">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold shrink-0">
+                02</div>
+              <div>
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm">Rigorous Supply Chain Control</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                  Direct tier-1 partnerships with certified steel and aggregate suppliers safeguard your construction
+                  schedules against market delays.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="about.html"
+              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-500 hover:text-amber-400">
+              Read Our Full Company History & Certifications →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Leadership Profiles (Two CEOs) -->
+      <div class="pt-12 border-t border-slate-200 dark:border-slate-800">
+        <div class="reveal-on-scroll text-center max-w-2xl mx-auto mb-14">
+          <span
+            class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Executive
+            Direction</span>
+          <h3 class="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mt-3">Principal Leadership</h3>
+          <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">
+            Dual leadership bridging structural civil engineering and commercial capital project execution.
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <!-- CEO 1: Marcus Vance -->
+          <div
+            class="reveal-on-scroll bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+            <!-- Large Portrait Frame -->
+            <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+                alt="Marcus Vance, P.E. - Co-CEO, Civil Engineering & Operations"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+              <div
+                class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+                22+ Years Field Operations
+              </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+              <div class="space-y-2.5">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                  Co-CEO & Head of Civil Engineering
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Marcus
+                  Vance, P.E.</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                  Former chief structural engineer on multi-state highway bridges and high-load civil works. Marcus
+                  oversees
+                  site safety protocols, geotech validation, OSHA compliance, and direct subcontractor execution across
+                  Plan.B
+                  projects.
+                </p>
+              </div>
+              <div
+                class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Heavy Structural &
+                    Civil</strong></span>
+                <span class="font-mono text-amber-600 dark:text-amber-400 font-bold text-sm">PKR 280M+ Field
+                  Overseen</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CEO 2: Elena Rostova -->
+          <div
+            class="reveal-on-scroll delay-100 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+            <!-- Large Portrait Frame -->
+            <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80"
+                alt="Elena Rostova, AIA - Co-CEO, Development & Strategy"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+              <div
+                class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+                LEED AP BD+C Certified
+              </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+              <div class="space-y-2.5">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                  Co-CEO & Head of Capital Projects
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Elena
+                  Rostova, AIA</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                  With a background spanning commercial real estate development and architectural design, Elena directs
+                  Plan.B
+                  pre-construction feasibility, BIM digital orchestration, municipal zoning, and client equity
+                  partnerships.
+                </p>
+              </div>
+              <div
+                class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Commercial &
+                    Pre-Con BIM</strong></span>
+                <span class="font-mono text-amber-600 dark:text-amber-400 font-bold text-sm">PKR 350M+ Portfolio
+                  Closed</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Manager: David Sterling -->
+          <div
+            class="reveal-on-scroll delay-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+            <!-- Large Portrait Frame -->
+            <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80"
+                alt="David Sterling, PMP - Chief Project Manager & Schedule Controller"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+              <div
+                class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+                PMP & VDC Certified
+              </div>
+            </div>
+
+            <!-- Content Section -->
+            <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+              <div class="space-y-2.5">
+                <span
+                  class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                  Chief Project Manager & VDC Controller
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">David
+                  Sterling, PMP</h3>
+                <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                  Specializing in multi-phase megastructure logistics, critical path schedule management, budget
+                  containment, and field subcontractor coordination across commercial and industrial developments.
+                </p>
+              </div>
+              <div
+                class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Schedule & Cost
+                    Control</strong></span>
+                <span class="font-mono text-amber-600 dark:text-amber-400 font-bold text-sm">PKR 190M+ On-Time
+                  Delivery</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="py-28 max-w-7xl mx-auto px-6 relative">
+      <div class="reveal-on-scroll flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+        <div>
+          <span
+            class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Full
+            Capabilities</span>
+          <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">Engineered For Longevity
+          </h2>
+        </div>
+        <p class="text-slate-600 dark:text-slate-400 max-w-md text-sm sm:text-base">
+          From foundation excavation to architectural handover, our multidisciplinary teams manage the entire
+          construction
+          lifecycle.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div
+          class="reveal-on-scroll liquid-glass-card rounded-3xl overflow-hidden hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group">
+          <div class="h-48 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+            <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=80"
+              alt="General Contracting"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span
+              class="absolute top-4 left-4 w-10 h-10 bg-slate-950/80 backdrop-blur rounded-xl flex items-center justify-center text-amber-400 font-mono font-bold text-sm border border-slate-700/60">01</span>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">General Contracting</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              End-to-end site control, subcontractor orchestration, schedule enforcement, and risk containment for major
+              builds.
+            </p>
+            <a href="services.html#commercial"
+              class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Explore Commercial
+              Division
+              →</a>
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-100 liquid-glass-card rounded-3xl overflow-hidden hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group">
+          <div class="h-48 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+              alt="Pre-Construction & BOQ"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span
+              class="absolute top-4 left-4 w-10 h-10 bg-slate-950/80 backdrop-blur rounded-xl flex items-center justify-center text-amber-400 font-mono font-bold text-sm border border-slate-700/60">02</span>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Pre-Construction & BOQ</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              BIM 3D modeling, geotechnical testing, accurate quantity takeoff, zoning validation, and value
+              engineering.
+            </p>
+            <a href="services.html#bim"
+              class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Explore BIM Engineering
+              →</a>
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-200 liquid-glass-card rounded-3xl overflow-hidden hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group">
+          <div class="h-48 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+            <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
+              alt="Civil & Infrastructure"
+              class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <span
+              class="absolute top-4 left-4 w-10 h-10 bg-slate-950/80 backdrop-blur rounded-xl flex items-center justify-center text-amber-400 font-mono font-bold text-sm border border-slate-700/60">03</span>
+          </div>
+          <div class="p-8">
+            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">Civil & Infrastructure</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6">
+              Deep structural reinforcement, load-bearing remediation, facade modernizations, and industrial
+              rehabilitation.
+            </p>
+            <a href="services.html#civil"
+              class="text-xs font-semibold text-amber-600 dark:text-amber-400 hover:underline">Explore Civil
+              Infrastructure →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS / PORTFOLIO SECTION -->
+    <section id="projects"
+      class="py-24 bg-slate-100 dark:bg-slate-900/60 border-t border-slate-200 dark:border-slate-800 px-6 transition-colors duration-200 relative">
+      <div class="max-w-7xl mx-auto">
+        <div class="reveal-on-scroll flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <span
+              class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Proven
+              Execution</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">Featured Developments
+            </h2>
+          </div>
+
+          <div class="flex flex-wrap gap-2" id="portfolioFilters">
+            <button type="button" data-filter="all"
+              class="filter-btn active bg-amber-500 text-slate-950 font-semibold text-xs px-4 py-2 rounded-lg transition">All
+              Builds</button>
+            <button type="button" data-filter="commercial"
+              class="filter-btn bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs px-4 py-2 rounded-lg transition">Commercial</button>
+            <button type="button" data-filter="industrial"
+              class="filter-btn bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs px-4 py-2 rounded-lg transition">Industrial</button>
+            <button type="button" data-filter="residential"
+              class="filter-btn bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-xs px-4 py-2 rounded-lg transition">Residential</button>
+          </div>
+        </div>
+
+        <!-- Project Cards Grid -->
+        <div class="grid md:grid-cols-3 gap-8" id="projectsGrid">
+          <!-- Card 1: Commercial (Nexus Financial Tower) -->
+          <div
+            class="project-card commercial reveal-on-scroll bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
+            data-project-card data-title="Nexus Financial Tower" data-category="Commercial" data-budget="PKR 84M Budget"
+            data-scale="380,000 sq ft"
+            data-desc="34-story structural steel corporate headquarters with LEED Gold energy certification."
+            data-specs='["LEED Gold Certified", "34 Above-Ground Floors", "Substructure 4-Level Parking", "Dual-Tuned Mass Damper"]'>
+            <div class="h-64 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80"
+                alt="Nexus Financial Tower Construction"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500 project-img">
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-950/80 backdrop-blur px-3 py-1 rounded-md text-[11px] text-amber-600 dark:text-amber-400 font-semibold border border-slate-200 dark:border-slate-800 shadow-sm">
+                Commercial
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition">Nexus
+                Financial Tower</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-xs mt-2 leading-relaxed">34-story structural steel
+                corporate headquarters with LEED Gold energy certification.</p>
+              <div
+                class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-900 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Completed: 2025</span>
+                <span class="text-slate-800 dark:text-slate-300 font-semibold">PKR 84M Scope</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Industrial (Vanguard Logistics Hub) -->
+          <div
+            class="project-card industrial reveal-on-scroll delay-100 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
+            data-project-card data-title="Vanguard Logistics Hub" data-category="Industrial"
+            data-budget="PKR 42M Budget" data-scale="250,000 sq ft"
+            data-desc="250,000 sq ft automated cold storage distribution center with post-tensioned slabs."
+            data-specs='["Zero Thermal Loss Insulation", "Post-Tensioned Heavy Slab", "24/7 Automated Robotic Loading Docks", "10MW Roof Solar Array"]'>
+            <div class="h-64 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1000&q=80"
+                alt="Vanguard Logistics Hub"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500 project-img">
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-950/80 backdrop-blur px-3 py-1 rounded-md text-[11px] text-amber-600 dark:text-amber-400 font-semibold border border-slate-200 dark:border-slate-800 shadow-sm">
+                Industrial
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition">
+                Vanguard
+                Logistics Hub</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-xs mt-2 leading-relaxed">250,000 sq ft automated cold
+                storage distribution center with post-tensioned slabs.</p>
+              <div
+                class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-900 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Completed: 2024</span>
+                <span class="text-slate-800 dark:text-slate-300 font-semibold">PKR 42M Scope</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Residential (The Horizon Ridge Villa) -->
+          <div
+            class="project-card residential reveal-on-scroll delay-200 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden group hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
+            data-project-card data-title="The Horizon Ridge Villa" data-category="Residential"
+            data-budget="PKR 6.5M Budget" data-scale="12,000 sq ft"
+            data-desc="Architectural hillside private residence featuring cantilevered concrete decks and smart automation."
+            data-specs='["Cantilevered Concrete Slabs", "Infinity Pool Overhang", "Floor-to-Ceiling Thermal Glazing", "Smart Home Automation"]'>
+            <div class="h-64 relative overflow-hidden bg-slate-200 dark:bg-slate-800">
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80"
+                alt="The Horizon Ridge Villa"
+                class="w-full h-full object-cover group-hover:scale-105 transition duration-500 project-img">
+              <div
+                class="absolute top-4 left-4 bg-white/90 dark:bg-slate-950/80 backdrop-blur px-3 py-1 rounded-md text-[11px] text-amber-600 dark:text-amber-400 font-semibold border border-slate-200 dark:border-slate-800 shadow-sm">
+                Residential
+              </div>
+            </div>
+            <div class="p-6">
+              <h3 class="text-lg font-bold text-slate-900 dark:text-white group-hover:text-amber-500 transition">The
+                Horizon Ridge Villa</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-xs mt-2 leading-relaxed">Architectural hillside private
+                residence featuring cantilevered concrete decks and smart automation.</p>
+              <div
+                class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-900 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+                <span>Completed: 2025</span>
+                <span class="text-slate-800 dark:text-slate-300 font-semibold">PKR 6.5M Scope</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <a href="projects.html"
+            class="inline-flex items-center gap-2 bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white font-bold px-8 py-3.5 rounded-xl text-sm transition border border-slate-700">
+            View All 6 Portfolio Case Studies →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-24 max-w-4xl mx-auto px-6 relative">
+      <div class="reveal-on-scroll text-center mb-16">
+        <span
+          class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Common
+          Inquiries</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">Frequently Asked Questions
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 max-w-xl mx-auto mt-3 text-sm sm:text-base">
+          Transparent answers regarding our procurement procedures, project controls, safety benchmarks, and bidding
+          phases.
+        </p>
+      </div>
+
+      <!-- Accordion List -->
+      <div class="space-y-4">
+        <div
+          class="reveal-on-scroll bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition">
+          <button type="button"
+            class="faq-toggle w-full flex items-center justify-between p-6 text-left focus:outline-none">
+            <span class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">What contract models and billing
+              frameworks does Plan.B offer?</span>
+            <span
+              class="faq-icon w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-amber-500 shrink-0 ml-4 transition-transform duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4">
+            We operate across multiple standard commercial frameworks, including Guaranteed Maximum Price (GMP), Lump
+            Sum
+            General Contracting, and Integrated Project Delivery (IPD). Our pre-construction engineers provide open-book
+            accounting and line-item transparency for every milestone.
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-100 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition">
+          <button type="button"
+            class="faq-toggle w-full flex items-center justify-between p-6 text-left focus:outline-none">
+            <span class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">How are zoning, structural
+              engineering, and municipal permits handled?</span>
+            <span
+              class="faq-icon w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-amber-500 shrink-0 ml-4 transition-transform duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4">
+            Our pre-construction and municipal compliance teams manage the entire jurisdictional approvals process. We
+            handle environmental reviews, geotechnical approvals, structural code filings, and MEP safety sign-offs
+            directly with regional building departments.
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-200 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition">
+          <button type="button"
+            class="faq-toggle w-full flex items-center justify-between p-6 text-left focus:outline-none">
+            <span class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">What protocols safeguard
+              projects
+              against material price escalation?</span>
+            <span
+              class="faq-icon w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-amber-500 shrink-0 ml-4 transition-transform duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4">
+            We maintain direct procurement agreements with major steel fabricators, concrete suppliers, and equipment
+            vendors. For long-lead critical infrastructure, we utilize forward-purchasing contracts and secure regional
+            staging depots to lock in material pricing before excavation starts.
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-300 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden shadow-sm transition">
+          <button type="button"
+            class="faq-toggle w-full flex items-center justify-between p-6 text-left focus:outline-none">
+            <span class="font-bold text-slate-900 dark:text-white text-base sm:text-lg">How does Plan.B maintain jobsite
+              safety standards across active builds?</span>
+            <span
+              class="faq-icon w-8 h-8 rounded-lg bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-amber-500 shrink-0 ml-4 transition-transform duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </button>
+          <div
+            class="faq-content hidden px-6 pb-6 text-sm text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-100 dark:border-slate-800 pt-4">
+            Every site is governed under our ISO 4501 safety management system. Our dedicated on-site safety directors
+            conduct daily hazard assessments, mandatory digital toolbox talks, and subcontractor compliance audits,
+            keeping our EMR (Experience Modification Rate) well below industry thresholds.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT & LEAD CAPTURE SECTION -->
+    <section id="contact" class="py-24 max-w-7xl mx-auto px-6 relative">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <div class="reveal-on-scroll lg:col-span-5 space-y-6">
+          <div>
+            <span
+              class="text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Direct
+              Engagement</span>
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white mt-4">Initiate Your Build.
+            </h2>
+            <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mt-4">
+              Have architectural drawings, an RFP, or land earmarked for development? Connect with our project directors
+              for feasibility estimates and commercial bids.
+            </p>
+          </div>
+
+          <div class="space-y-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-sm">
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 shrink-0 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white">Central Operations</div>
+                <div class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">Commercial Building Plaza, Main
+                  Boulevard,
+                  Gulberg III, Lahore, Pakistan</div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 shrink-0 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                  </path>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white">Direct Line</div>
+                <div class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">+92 (42) 3575-0199 / +1 (800) 555-0199
+                </div>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div
+                class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 shrink-0 shadow-sm">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                  </path>
+                </svg>
+              </div>
+              <div>
+                <div class="font-bold text-slate-900 dark:text-white">RFP Submissions</div>
+                <div class="text-slate-500 dark:text-slate-400 text-xs mt-0.5">procurement@planb.com</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-2">
+            <a href="contact.html"
+              class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-500 hover:text-amber-400">
+              Open Interactive Map & Office Direction →
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="reveal-on-scroll delay-200 lg:col-span-7 bg-white/95 dark:bg-slate-900/95 backdrop-blur border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-10 shadow-xl">
+          <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-6">Request Official Proposal / Site Visit</h3>
+
+          <form id="quoteForm"
+            onsubmit="event.preventDefault(); alert('Inquiry sent! Our estimation engineering team at Plan.B will contact you within 24 hours.');"
+            class="space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Your
+                  Name</label>
+                <input type="text" name="name" required placeholder="Ahmed Khan"
+                  class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition">
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Your
+                  Email</label>
+                <input type="email" name="email" required placeholder="ahmed.khan@example.com"
+                  class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition">
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Phone
+                  Number</label>
+                <input type="tel" name="phone" placeholder="+92 310 1234567"
+                  class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition">
+              </div>
+              <div>
+                <label
+                  class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Project
+                  Category</label>
+                <select name="category"
+                  class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition">
+                  <option class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Commercial Construction
+                  </option>
+                  <option class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Industrial Warehouse
+                  </option>
+                  <option class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Civil & Infrastructure
+                  </option>
+                  <option class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Luxury Residential</option>
+                  <option class="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">Structural Renovation
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label
+                class="block text-xs font-semibold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">Project
+                Details & Location</label>
+              <textarea name="details" rows="4"
+                placeholder="Mention approximate footprint, timeline, or attach RFP details..."
+                class="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl px-4 py-3 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-amber-500 transition"></textarea>
+            </div>
+
+            <button type="submit"
+              class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl text-sm transition shadow-md hover:-translate-y-0.5">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="liquid-glass-footer py-8 sm:py-10 px-6 transition-colors duration-200 relative z-10">
+      <div class="max-w-[1700px] mx-auto px-2 lg:px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+        <!-- Footer Logo -->
+        <div class="flex items-center gap-3.5">
+          <img src="logo.png" alt="Plan.B Logo"
+            class="h-12 sm:h-14 w-auto object-contain dark:brightness-0 dark:invert">
+          <div class="leading-none flex flex-col justify-center">
+            <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+              PLAN<span class="text-amber-500">.B</span>
+            </span>
+            <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+              Engineering Solutions
+            </span>
+            <p class="text-slate-500 dark:text-slate-400 text-xs mt-2 leading-tight">Heavy Infrastructure & Commercial
+              Development.</p>
+          </div>
+        </div>
+
+        <!-- Quick Nav Links in Footer -->
+        <div class="flex flex-wrap gap-6 lg:gap-10 text-xs text-slate-600 dark:text-slate-400">
+          <a href="about.html" class="hover:text-amber-500 transition-colors">About Us</a>
+          <a href="services.html" class="hover:text-amber-500 transition-colors">Services</a>
+          <a href="calculator.html" class="hover:text-amber-500 transition-colors">Cost Estimator</a>
+          <a href="projects.html" class="hover:text-amber-500 transition-colors">Projects</a>
+          <a href="contact.html" class="hover:text-amber-500 transition-colors">Contact & Map</a>
+        </div>
+
+        <!-- Footer Social Presence -->
+        <div class="flex items-center space-x-3">
+          <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+            </svg>
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+            </svg>
+          </a>
+          <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"
+            class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path
+                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+            </svg>
+          </a>
+          <button type="button" aria-label="Share Link"
+            class="copy-link-btn w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition cursor-pointer">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+              </path>
+            </svg>
+          </button>
+        </div>
+
+        <div class="text-slate-400 dark:text-slate-500 text-xs text-center md:text-right space-y-1">
+          <div>&copy; 2026 Plan.B Engineering Solutions. All rights reserved.</div>
+          <div class="text-[11px] text-slate-500 dark:text-slate-400">
+            Developed by <a href="https://pk.linkedin.com/in/hixzi" target="_blank" rel="noopener noreferrer"
+              class="font-medium text-slate-700 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-500 transition-colors">Muhammad
+              Salman</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div><!-- /#pageContent -->
+
+  <!-- LIQUID GLASS SHARED IMAGE PROJECT MODAL -->
+  <div id="projectModal"
+    class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 md:p-10 opacity-0 pointer-events-none transition-opacity duration-300">
+    <!-- Backdrop -->
+    <div id="projectModalBackdrop" class="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"></div>
+
+    <!-- Modal Content Card -->
+    <div id="projectModalCard"
+      class="relative z-10 w-full max-w-5xl max-h-[90vh] overflow-y-auto hide-scrollbar liquid-glass-card rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl space-y-6 transform scale-95 transition-transform duration-300">
+
+      <!-- Close Button -->
+      <button id="projectModalClose" type="button" aria-label="Close Modal"
+        class="absolute top-5 right-5 sm:top-7 sm:right-7 p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-amber-500 hover:text-slate-950 transition cursor-pointer z-20 shadow-md">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <!-- Main Grid Layout -->
+      <div class="grid lg:grid-cols-12 gap-8 items-start">
+        <!-- Shared Target Image Container -->
+        <div
+          class="lg:col-span-7 rounded-2xl overflow-hidden bg-slate-900 aspect-4/3 relative border border-slate-700/40 shadow-inner">
+          <img id="projectModalImg" src="" alt="" class="w-full h-full object-cover transition-all duration-300">
+          <span id="projectModalBadge"
+            class="absolute top-4 left-4 bg-slate-950/80 backdrop-blur border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest px-3.5 py-1.5 rounded-full"></span>
+        </div>
+
+        <!-- Project Spec Details -->
+        <div class="lg:col-span-5 space-y-5">
+          <h2 id="projectModalTitle"
+            class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight"></h2>
+          <p id="projectModalDesc" class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed"></p>
+
+          <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-200/80 dark:border-slate-800/80">
+            <div>
+              <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Project Budget</span>
+              <span id="projectModalBudget" class="text-base font-bold font-mono text-amber-500"></span>
+            </div>
+            <div>
+              <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest">Total Footprint</span>
+              <span id="projectModalScale" class="text-base font-bold text-slate-800 dark:text-slate-200"></span>
+            </div>
+          </div>
+
+          <!-- Specs List -->
+          <div>
+            <h4 class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-3">Technical Highlights</h4>
+            <ul id="projectModalSpecs" class="space-y-2 text-xs text-slate-600 dark:text-slate-300 font-medium"></ul>
+          </div>
+
+          <!-- CTA Button -->
+          <div class="pt-2">
+            <a href="contact.html"
+              class="inline-flex items-center justify-center w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3.5 px-6 rounded-xl text-xs uppercase tracking-wider transition shadow-lg shadow-amber-500/20">
+              Inquire About Similar Project
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIENT SCRIPTS ENGINE -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // SHARED ELEMENT IMAGE TRANSITION ENGINE
+      let activeOriginImg = null;
+
+      function openProjectModal(card) {
+        const modal = document.getElementById('projectModal');
+        const modalCard = document.getElementById('projectModalCard');
+        const modalImg = document.getElementById('projectModalImg');
+        const originImg = card.querySelector('.project-img');
+
+        if (!modal || !modalImg || !originImg) return;
+        activeOriginImg = originImg;
+
+        if (modalCard) {
+          modalCard.scrollTop = 0;
+        }
+
+        // Populate metadata
+        document.getElementById('projectModalTitle').textContent = card.dataset.title || '';
+        document.getElementById('projectModalBadge').textContent = card.dataset.category || '';
+        document.getElementById('projectModalBudget').textContent = card.dataset.budget || '';
+        document.getElementById('projectModalScale').textContent = card.dataset.scale || '';
+        document.getElementById('projectModalDesc').textContent = card.dataset.desc || '';
+
+        const specsList = document.getElementById('projectModalSpecs');
+        if (specsList && card.dataset.specs) {
+          try {
+            const specs = JSON.parse(card.dataset.specs);
+            specsList.innerHTML = specs.map(s => `<li class="flex items-center gap-2"><svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg><span>${s}</span></li>`).join('');
+          } catch (e) {
+            specsList.innerHTML = '';
+          }
+        }
+
+        modalImg.src = originImg.src;
+        modalImg.alt = originImg.alt;
+
+        const firstRect = originImg.getBoundingClientRect();
+
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100');
+        modalCard.classList.remove('scale-95');
+        modalCard.classList.add('scale-100');
+
+        modalImg.style.opacity = '0';
+        originImg.style.opacity = '0';
+
+        const lastRect = modalImg.getBoundingClientRect();
+
+        const clone = document.createElement('img');
+        clone.src = originImg.src;
+        clone.className = 'shared-image-clone';
+        clone.style.top = `${firstRect.top}px`;
+        clone.style.left = `${firstRect.left}px`;
+        clone.style.width = `${firstRect.width}px`;
+        clone.style.height = `${firstRect.height}px`;
+        clone.style.borderRadius = '1rem';
+        document.body.appendChild(clone);
+
+        clone.getBoundingClientRect();
+
+        clone.style.top = `${lastRect.top}px`;
+        clone.style.left = `${lastRect.left}px`;
+        clone.style.width = `${lastRect.width}px`;
+        clone.style.height = `${lastRect.height}px`;
+        clone.style.borderRadius = '1rem';
+
+        setTimeout(() => {
+          modalImg.style.opacity = '1';
+          if (clone.parentNode) clone.parentNode.removeChild(clone);
+        }, 380);
+      }
+
+      function closeProjectModal() {
+        const modal = document.getElementById('projectModal');
+        const modalCard = document.getElementById('projectModalCard');
+        const modalImg = document.getElementById('projectModalImg');
+        if (!modal || !modalImg || !activeOriginImg) {
+          if (modal) {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('opacity-100');
+          }
+          return;
+        }
+
+        const lastRect = modalImg.getBoundingClientRect();
+        const firstRect = activeOriginImg.getBoundingClientRect();
+
+        const clone = document.createElement('img');
+        clone.src = modalImg.src;
+        clone.className = 'shared-image-clone';
+        clone.style.top = `${lastRect.top}px`;
+        clone.style.left = `${lastRect.left}px`;
+        clone.style.width = `${lastRect.width}px`;
+        clone.style.height = `${lastRect.height}px`;
+        clone.style.borderRadius = '1rem';
+        document.body.appendChild(clone);
+
+        modalImg.style.opacity = '0';
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.classList.remove('opacity-100');
+        modalCard.classList.add('scale-95');
+        modalCard.classList.remove('scale-100');
+
+        clone.getBoundingClientRect();
+
+        clone.style.top = `${firstRect.top}px`;
+        clone.style.left = `${firstRect.left}px`;
+        clone.style.width = `${firstRect.width}px`;
+        clone.style.height = `${firstRect.height}px`;
+        clone.style.borderRadius = '1rem';
+
+        setTimeout(() => {
+          if (activeOriginImg) activeOriginImg.style.opacity = '1';
+          if (clone.parentNode) clone.parentNode.removeChild(clone);
+          activeOriginImg = null;
+        }, 380);
+      }
+
+      document.querySelectorAll('[data-project-card]').forEach(card => {
+        card.addEventListener('click', () => openProjectModal(card));
+      });
+
+      const closeBtn = document.getElementById('projectModalClose');
+      const backdrop = document.getElementById('projectModalBackdrop');
+      if (closeBtn) closeBtn.addEventListener('click', closeProjectModal);
+      if (backdrop) backdrop.addEventListener('click', closeProjectModal);
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeProjectModal();
+      });
+
+      // 0. PAGE TRANSITION HANDLER (STATIONARY NAVBAR)
+      const pageWrap = document.getElementById('pageContent');
+      if (pageWrap) {
+        requestAnimationFrame(() => pageWrap.classList.add('page-loaded'));
+      }
+
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:') || anchor.getAttribute('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+
+        const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+        const targetFile = href.split('#')[0].split('/').pop();
+        if (targetFile && targetFile !== currentFile) {
+          if (pageWrap) {
+            e.preventDefault();
+            pageWrap.classList.remove('page-loaded');
+            pageWrap.classList.add('page-exiting');
+            setTimeout(() => { window.location.href = href; }, 240);
+          }
+        }
+      });
+
+      // 1. HERO VECTOR DRAFTING CANVAS
+      const canvas = document.getElementById('heroCanvas');
+      if (canvas) {
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = canvas.parentElement.offsetHeight;
+
+        window.addEventListener('resize', () => {
+          width = canvas.width = window.innerWidth;
+          height = canvas.height = canvas.parentElement.offsetHeight;
+        });
+
+        const nodeCount = Math.floor(width / 32);
+        const nodes = [];
+        for (let i = 0; i < nodeCount; i++) {
+          nodes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            radius: Math.random() * 2 + 1
+          });
+        }
+
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+          const rect = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - rect.left;
+          mouse.y = e.clientY - rect.top;
+        });
+        window.addEventListener('mouseleave', () => {
+          mouse.x = null;
+          mouse.y = null;
+        });
+
+        function renderCanvas() {
+          ctx.clearRect(0, 0, width, height);
+
+          for (let i = 0; i < nodes.length; i++) {
+            for (let j = i + 1; j < nodes.length; j++) {
+              const dx = nodes[i].x - nodes[j].x;
+              const dy = nodes[i].y - nodes[j].y;
+              const dist = Math.sqrt(dx * dx + dy * dy);
+
+              if (dist < 130) {
+                const alpha = (1 - dist / 130) * 0.22;
+                ctx.strokeStyle = `rgba(245, 158, 11, ${alpha})`;
+                ctx.lineWidth = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(nodes[i].x, nodes[i].y);
+                ctx.lineTo(nodes[j].x, nodes[j].y);
+                ctx.stroke();
+              }
+            }
+          }
+
+          for (let i = 0; i < nodes.length; i++) {
+            const node = nodes[i];
+            if (mouse.x !== null && mouse.y !== null) {
+              const mdx = mouse.x - node.x;
+              const mdy = mouse.y - node.y;
+              const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+              if (mdist < 140) {
+                node.x -= (mdx / mdist) * 0.8;
+                node.y -= (mdy / mdist) * 0.8;
+              }
+            }
+
+            node.x += node.vx;
+            node.y += node.vy;
+
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.45)';
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          requestAnimationFrame(renderCanvas);
+        }
+        renderCanvas();
+      }
+
+      // 2. SCROLL REVEAL OBSERVER
+      const reveals = document.querySelectorAll('.reveal-on-scroll');
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -40px 0px'
+      });
+      reveals.forEach(el => observer.observe(el));
+
+      // 3. ANIMATED STAT COUNTERS
+      const counters = document.querySelectorAll('.counter');
+      const counterObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const counter = entry.target;
+            const target = +counter.getAttribute('data-target');
+            const duration = 1600;
+            const stepTime = 20;
+            const totalSteps = duration / stepTime;
+            const increment = target / totalSteps;
+            let current = 0;
+
+            const updateCount = () => {
+              current += increment;
+              if (current < target) {
+                counter.innerText = Math.ceil(current);
+                setTimeout(updateCount, stepTime);
+              } else {
+                counter.innerText = target;
+              }
+            };
+
+            updateCount();
+            obs.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(counter => counterObserver.observe(counter));
+
+      // 4. LIGHT / DARK MODE TOGGLE
+      const html = document.documentElement;
+      const themeToggle = document.getElementById('themeToggle');
+      const sunIcon = document.getElementById('sunIcon');
+      const moonIcon = document.getElementById('moonIcon');
+
+      function updateThemeIcons(isDark) {
+        if (isDark) {
+          sunIcon.classList.remove('hidden');
+          moonIcon.classList.add('hidden');
+        } else {
+          sunIcon.classList.add('hidden');
+          moonIcon.classList.remove('hidden');
+        }
+      }
+
+      updateThemeIcons(html.classList.contains('dark'));
+
+      themeToggle.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        localStorage.setItem('apex_theme', isDark ? 'dark' : 'light');
+        updateThemeIcons(isDark);
+      });
+
+      // HEADER BOTTOM OUTLINE SCROLL PROGRESS ANIMATION
+      function updateHeaderProgress() {
+        const progressBar = document.getElementById('headerScrollProgress');
+        if (!progressBar) return;
+        const winScroll = window.scrollY || document.documentElement.scrollTop || 0;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const pct = height > 0 ? (winScroll / height) * 100 : 0;
+        progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+      }
+      window.addEventListener('scroll', updateHeaderProgress, { passive: true });
+      window.addEventListener('resize', updateHeaderProgress, { passive: true });
+      document.addEventListener('DOMContentLoaded', updateHeaderProgress);
+      updateHeaderProgress();
+
+      // 5. MOBILE POPOVER MENU TOGGLE
+      const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const mobileBackdrop = document.getElementById('mobileMenuBackdrop');
+      const menuBurger = document.getElementById('menuBurger');
+      const menuClose = document.getElementById('menuClose');
+      const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+      const mobileSearchInput = document.getElementById('mobileSearchInput');
+
+      function openMobileMenu() {
+        mobileMenu.classList.remove('hidden');
+        if (mobileBackdrop) mobileBackdrop.classList.remove('hidden');
+        menuBurger.classList.add('hidden');
+        menuClose.classList.remove('hidden');
+      }
+
+      function closeMobileMenu() {
+        mobileMenu.classList.add('hidden');
+        if (mobileBackdrop) mobileBackdrop.classList.add('hidden');
+        menuBurger.classList.remove('hidden');
+        menuClose.classList.add('hidden');
+        if (mobileSearchInput) {
+          mobileSearchInput.value = '';
+          document.querySelectorAll('#mobileNavItems .mobile-nav-link').forEach(el => el.style.display = 'block');
+        }
+      }
+
+      function toggleMobileMenu() {
+        const isOpen = !mobileMenu.classList.contains('hidden');
+        if (isOpen) closeMobileMenu();
+        else openMobileMenu();
+      }
+
+      if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+      if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileMenu);
+      });
+
+      if (mobileSearchInput) {
+        mobileSearchInput.addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase().trim();
+          document.querySelectorAll('#mobileNavItems .mobile-nav-link').forEach(item => {
+            const text = item.textContent.toLowerCase();
+            item.style.display = text.includes(query) ? 'block' : 'none';
+          });
+        });
+      }
+
+
+
+      // 7. PORTFOLIO FILTERING
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => {
+            b.classList.remove('active', 'bg-amber-500', 'text-slate-950', 'font-bold', 'shadow-md');
+            b.classList.add('bg-slate-200', 'dark:bg-slate-800', 'hover:bg-slate-300', 'dark:hover:bg-slate-700', 'text-slate-700', 'dark:text-slate-300', 'font-semibold');
+          });
+          btn.classList.add('active', 'bg-amber-500', 'text-slate-950', 'font-bold', 'shadow-md');
+          btn.classList.remove('bg-slate-200', 'dark:bg-slate-800', 'hover:bg-slate-300', 'dark:hover:bg-slate-700', 'text-slate-700', 'dark:text-slate-300', 'font-semibold');
+
+          const filter = btn.dataset.filter;
+          projectCards.forEach(card => {
+            if (filter === 'all' || card.classList.contains(filter)) {
+              card.style.display = 'block';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+
+      // 8. FAQ ACCORDION INTERACTION
+      const faqToggles = document.querySelectorAll('.faq-toggle');
+      faqToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+          const content = toggle.nextElementSibling;
+          const icon = toggle.querySelector('.faq-icon');
+          const isCurrentlyOpen = !content.classList.contains('hidden');
+
+          document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+          document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+          if (!isCurrentlyOpen) {
+            content.classList.remove('hidden');
+            icon.classList.add('rotate-180');
+          }
+        });
+      });
+
+      // 9. COPY WEBSITE HOMEPAGE LINK HANDLER WITH TOAST NOTIFICATION
+      function showCopyToast(msg) {
+        let toast = document.getElementById('copyToast');
+        if (!toast) {
+          toast = document.createElement('div');
+          toast.id = 'copyToast';
+          toast.className = 'fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 border border-slate-700/50 dark:border-slate-200 shadow-2xl text-xs font-bold tracking-wide transition-all duration-300 opacity-0 translate-y-4 pointer-events-none';
+          toast.innerHTML = `
+            <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+            </svg>
+            <span id="copyToastText">${msg}</span>
+          `;
+          document.body.appendChild(toast);
+        } else {
+          document.getElementById('copyToastText').textContent = msg;
+        }
+
+        requestAnimationFrame(() => {
+          toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+          toast.classList.add('opacity-100', 'translate-y-0');
+        });
+
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+          toast.classList.remove('opacity-100', 'translate-y-0');
+          toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+        }, 2500);
+      }
+
+      const linkSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>`;
+      const checkSvg = `<svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`;
+
+      const copyLinkBtns = document.querySelectorAll('.copy-link-btn');
+      copyLinkBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          let homeUrl = window.location.origin + window.location.pathname;
+          if (homeUrl.endsWith('.html')) {
+            homeUrl = homeUrl.substring(0, homeUrl.lastIndexOf('/') + 1) + 'index.html';
+          } else if (!homeUrl.endsWith('/')) {
+            homeUrl += '/index.html';
+          }
+
+          const performCopy = () => {
+            btn.innerHTML = checkSvg;
+            btn.classList.add('border-amber-500', 'bg-amber-500/10');
+            showCopyToast("Website homepage link copied!");
+            setTimeout(() => {
+              btn.innerHTML = linkSvg;
+              btn.classList.remove('border-amber-500', 'bg-amber-500/10');
+            }, 2000);
+          };
+
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(homeUrl).then(performCopy).catch(() => {
+              const temp = document.createElement('input');
+              temp.value = homeUrl;
+              document.body.appendChild(temp);
+              temp.select();
+              document.execCommand('copy');
+              document.body.removeChild(temp);
+              performCopy();
+            });
+          } else {
+            const temp = document.createElement('input');
+            temp.value = homeUrl;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            performCopy();
+          }
+        });
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

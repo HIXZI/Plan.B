@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Plan.B Engineering Solutions</title>
+  
+  <!-- Prevent Theme Flash (Anti-FOUC) -->
+  <style>
+    html.dark { background-color: #020617; color: #f8fafc; }
+    html:not(.dark) { background-color: #f8fafc; color: #020617; }
+  </style>
+  <script>
+    (function () {
+      const saved = localStorage.getItem('apex_theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    })();
+  </script>
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Static Compiled Tailwind CSS (0ms Load Time) -->
+  <link rel="stylesheet" href="output.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950 transition-colors duration-200">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 liquid-glass-nav relative">
+    <div class="max-w-[1700px] mx-auto px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-3.5 group">
+        <img src="logo.png" alt="Plan.B Logo" class="h-11 sm:h-12 md:h-13 w-auto object-contain dark:brightness-0 dark:invert transition-transform duration-300 group-hover:scale-105">
+        <div class="leading-none flex flex-col justify-center">
+          <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+            PLAN<span class="text-amber-500">.B</span>
+          </span>
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+            Engineering Solutions
+          </span>
+        </div>
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 lg:space-x-12 xl:space-x-16 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
+        <a href="about.html" class="text-amber-500 dark:text-amber-400 font-bold border-b-2 border-amber-500 pb-1">About Us</a>
+        <a href="services.html" class="hover:text-slate-900 dark:hover:text-white transition">Services</a>
+        <a href="calculator.html" class="hover:text-slate-900 dark:hover:text-white transition">Cost Estimator</a>
+        <a href="projects.html" class="hover:text-slate-900 dark:hover:text-white transition">Projects</a>
+        <a href="index.html#faq" class="hover:text-slate-900 dark:hover:text-white transition">FAQ</a>
+        <a href="contact.html" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button id="themeToggle" type="button" aria-label="Toggle Theme" class="p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-amber-500 dark:hover:text-amber-400 transition">
+          <svg id="sunIcon" class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+          <svg id="moonIcon" class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        </button>
+        <a href="contact.html" class="hidden sm:inline-flex items-center bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-xl transition shadow-md shadow-amber-500/20">Submit RFP</a>
+        
+        <button id="mobileMenuBtn" type="button" aria-label="Toggle Menu" class="md:hidden p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24">
+            <path id="menuBurger" stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+            <path id="menuClose" class="hidden" stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Backdrop -->
+    <div id="mobileMenuBackdrop" class="fixed inset-0 z-40 hidden md:hidden"></div>
+
+    <!-- Mobile Floating Popover Card -->
+    <div id="mobileMenu" class="hidden md:hidden fixed top-24 right-4 sm:right-6 w-[calc(100vw-2rem)] max-w-xs sm:max-w-sm liquid-glass-card rounded-3xl p-5 shadow-2xl z-50 transition-all duration-200">
+      
+      <!-- Search / Quick Filter Bar -->
+      <div class="relative mb-3">
+        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+        <input 
+          type="text" 
+          id="mobileSearchInput" 
+          placeholder="SEARCH MENU / PAGES" 
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/60 text-[11px] font-bold uppercase tracking-wider text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-amber-500 transition"
+        >
+      </div>
+
+      <!-- Navigation Links with Pill Highlights -->
+      <div class="space-y-1 py-1" id="mobileNavItems">
+        <a href="about.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-500">About Us</a>
+        <a href="services.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Services</a>
+        <a href="calculator.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Cost Estimator</a>
+        <a href="projects.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Projects</a>
+        <a href="index.html#faq" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">FAQ</a>
+        <a href="contact.html" class="mobile-nav-link block px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-200 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:text-amber-500 dark:hover:text-amber-400 transition">Contact</a>
+      </div>
+
+      <!-- Bottom Action Button -->
+      <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800">
+        <a href="contact.html" class="mobile-nav-link block text-center w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs uppercase tracking-wider py-3.5 px-4 rounded-xl shadow-md transition duration-200">
+          Submit RFP
+        </a>
+      </div>
+    </div>
+
+    <!-- Header Bottom Outline Scroll Progress Bar -->
+    <div class="absolute bottom-0 left-0 right-0 h-[2.5px] bg-slate-200/20 dark:bg-slate-800/40 pointer-events-none overflow-hidden z-50">
+      <div id="headerScrollProgress" class="h-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.9)] transition-all duration-75" style="width: 0%;"></div>
+    </div>
+  </nav>
+
+  <!-- WRAPPER FOR PAGE TRANSITIONS (STATIONARY NAVBAR) -->
+  <div id="pageContent" class="page-content-wrap">
+
+    <!-- PAGE HEADER / HERO -->
+  <section class="relative pt-24 pb-28 px-6 overflow-hidden border-b border-slate-200/80 dark:border-slate-800/80">
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="about_hero.jpg" 
+        alt="Plan.B Corporate Engineering Blueprint" 
+        class="w-full h-full object-cover object-center"
+      >
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-slate-950/85 to-slate-950/70"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto">
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-tight">Built On Discipline. <br class="hidden sm:inline"><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Backed By Science.</span></h1>
+      <p class="text-slate-300 text-lg sm:text-xl max-w-3xl mt-4 leading-relaxed drop-shadow">Founded on a commitment to industrial precision and structural longevity, Plan.B Engineering Solutions brings together master civil engineers, LEED-accredited architects, and experienced project directors to deliver exceptional developments on schedule and within guaranteed budget ceilings.</p>
+    </div>
+  </section>
+
+  <!-- COMPANY STORY & STATS -->
+  <section class="py-24 max-w-7xl mx-auto px-6">
+    <div class="grid lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Visual with safety badge -->
+      <div class="lg:col-span-6 relative">
+        <div class="relative rounded-3xl overflow-hidden border border-slate-200/80 dark:border-slate-800/80 shadow-2xl">
+          <img 
+            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1200&q=80" 
+            alt="Plan.B Construction Directors and Engineers" 
+            class="w-full h-[480px] object-cover"
+          >
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-transparent to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 p-5 rounded-2xl bg-white/90 dark:bg-slate-900/90 backdrop-blur border border-slate-200/80 dark:border-slate-800/80">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 font-bold uppercase tracking-widest">Zero-Accident Safety Record</p>
+                <p class="text-lg font-bold text-slate-900 dark:text-white mt-0.5">3.2M Safe Work Hours Logged</p>
+              </div>
+              <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-500 flex items-center justify-center font-bold text-lg">
+                ✓
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Narrative & Journey -->
+      <div class="lg:col-span-6 space-y-6">
+        <span class="text-amber-500 dark:text-amber-400 text-[11px] font-bold uppercase tracking-widest">18 Years of Excellence</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">Eliminating Ambiguity in General Contracting</h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          Plan.B was established with a singular directive: to replace industry ambiguity with strict mathematical precision and open-book financial transparency. Over nearly two decades, we have evolved from a specialized heavy civil earthwork outfit into a premier general contracting group with comprehensive self-performing capabilities.
+        </p>
+        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+          By pairing advanced Building Information Modeling (BIM) digital twins with direct tier-1 supply chain procurement, we systematically de-risk complex builds, saving our clients an average of 14% on total project expenditures while delivering zero-defect handovers.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-2 gap-4 pt-4 border-t border-slate-200/80 dark:border-slate-800/80">
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition duration-300">
+            <div class="text-3xl font-black text-amber-500">18+</div>
+            <div class="text-[11px] uppercase tracking-widest font-bold text-slate-500 dark:text-slate-400 mt-1">Years Operating</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition duration-300">
+            <div class="text-3xl font-black text-amber-500">PKR 450M+</div>
+            <div class="text-[11px] uppercase tracking-widest font-bold text-slate-500 dark:text-slate-400 mt-1">Capital Delivered</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition duration-300">
+            <div class="text-3xl font-black text-amber-500">100%</div>
+            <div class="text-[11px] uppercase tracking-widest font-bold text-slate-500 dark:text-slate-400 mt-1">OSHA & Code Compliance</div>
+          </div>
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm hover:border-amber-500/50 hover:shadow-md transition duration-300">
+            <div class="text-3xl font-black text-amber-500">280+</div>
+            <div class="text-[11px] uppercase tracking-widest font-bold text-slate-500 dark:text-slate-400 mt-1">Master Builders & Staff</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRINCIPAL LEADERSHIP -->
+  <section class="py-24 bg-slate-100/70 dark:bg-slate-900/50 border-y border-slate-200/80 dark:border-slate-800/80 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-amber-500 text-[11px] font-bold uppercase tracking-widest bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20">Executive Direction</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-4">Principal Leadership</h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">Dual executive direction bridging heavy structural civil engineering and commercial capital project execution.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        
+        <!-- Marcus Vance -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+          <!-- Large Portrait Frame -->
+          <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <img 
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80" 
+              alt="Marcus Vance, P.E. - Co-CEO, Civil Engineering & Operations" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+              22+ Years Field Operations
+            </div>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-2.5">
+              <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                Co-CEO & Head of Civil Engineering
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Marcus Vance, P.E.</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                Former chief structural engineer on multi-state highway bridges and high-load civil works. Marcus oversees site safety protocols, geotechnical validation, OSHA compliance, and direct subcontractor execution across Plan.B projects.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+              <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Heavy Structural & Civil</strong></span>
+              <span class="font-mono text-amber-500 font-bold text-sm">PKR 280M+ Field Overseen</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elena Rostova -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+          <!-- Large Portrait Frame -->
+          <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <img 
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80" 
+              alt="Elena Rostova, AIA - Co-CEO, Development & Strategy" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+              LEED AP BD+C Certified
+            </div>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-2.5">
+              <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                Co-CEO & Head of Capital Projects
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">Elena Rostova, AIA</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                With a background spanning commercial real estate development and architectural design, Elena directs Plan.B pre-construction feasibility, BIM digital orchestration, municipal zoning, and client equity partnerships.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+              <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Commercial & Pre-Con BIM</strong></span>
+              <span class="font-mono text-amber-500 font-bold text-sm">PKR 350M+ Portfolio Closed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- David Sterling -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 rounded-3xl overflow-hidden shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300 group flex flex-col">
+          <!-- Large Portrait Frame -->
+          <div class="h-[460px] sm:h-[500px] w-full relative overflow-hidden bg-slate-100 dark:bg-slate-800">
+            <img 
+              src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=800&q=80" 
+              alt="David Sterling, PMP - Chief Project Manager & Schedule Controller" 
+              class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent"></div>
+            <div class="absolute top-4 right-4 bg-slate-950/80 backdrop-blur border border-slate-700/60 text-slate-200 text-xs px-3.5 py-1.5 rounded-full font-medium shadow-md">
+              PMP & VDC Certified
+            </div>
+          </div>
+
+          <!-- Content Section -->
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-6">
+            <div class="space-y-2.5">
+              <span class="inline-block px-3 py-1 rounded-full bg-amber-500/10 dark:bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25 font-bold text-[10px] uppercase tracking-widest">
+                Chief Project Manager & VDC Controller
+              </span>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">David Sterling, PMP</h3>
+              <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed pt-1">
+                Specializing in multi-phase megastructure logistics, critical path schedule management, budget containment, and field subcontractor coordination across commercial and industrial developments.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs text-slate-500 dark:text-slate-400">
+              <span>Specialization: <strong class="text-slate-700 dark:text-slate-200 font-medium">Schedule & Cost Control</strong></span>
+              <span class="font-mono text-amber-500 font-bold text-sm">PKR 190M+ On-Time Delivery</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE OPERATING PILLARS & CERTIFICATIONS -->
+  <section class="py-24 max-w-7xl mx-auto px-6">
+    <div class="text-center max-w-2xl mx-auto mb-16">
+      <span class="text-amber-500 text-[11px] font-bold uppercase tracking-widest bg-amber-500/10 px-3.5 py-1 rounded-full border border-amber-500/20">Operational Standards</span>
+      <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-4">Why Institutional Developers Choose Plan.B</h2>
+      <p class="text-slate-600 dark:text-slate-400 text-sm mt-3">Every phase of our operations is governed by internationally recognized regulatory certifications and transparent protocols.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      
+      <!-- Pillar 1 -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 p-8 rounded-3xl shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center font-mono font-bold text-lg mb-6">01</div>
+        <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">ISO 4501 Certified Safety</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          Our jobsites adhere to comprehensive occupational health and safety benchmarks. Daily digital toolbox meetings, third-party audits, and an Experience Modification Rate (EMR) far lower than the industry baseline ensure worker protection.
+        </p>
+        <span class="text-amber-500 text-[11px] font-bold uppercase tracking-wider">Zero Lost-Time Incidents Benchmark</span>
+      </div>
+
+      <!-- Pillar 2 -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 p-8 rounded-3xl shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center font-mono font-bold text-lg mb-6">02</div>
+        <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">Guaranteed Maximum Price (GMP)</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          We protect owner capital by offering transparent GMP and Lump Sum contracting models. Our open-book accounting gives stakeholders itemized takeoff transparency across material purchases and labor milestones.
+        </p>
+        <span class="text-amber-500 text-[11px] font-bold uppercase tracking-wider">100% Scope Accountability</span>
+      </div>
+
+      <!-- Pillar 3 -->
+      <div class="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 p-8 rounded-3xl shadow-sm hover:border-amber-500 dark:hover:border-amber-500 hover:shadow-xl dark:hover:shadow-[0_20px_40px_-15px_rgba(245,158,11,0.25)] hover:-translate-y-1.5 transition-all duration-300">
+        <div class="w-12 h-12 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center font-mono font-bold text-lg mb-6">03</div>
+        <h3 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">Supply Chain Sovereignty</h3>
+        <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed mb-4">
+          Direct tier-1 purchasing agreements with certified steel rolling mills, concrete batch plants, and aggregate quarries protect active construction timelines from volatile market fluctuations and component shortages.
+        </p>
+        <span class="text-amber-500 text-[11px] font-bold uppercase tracking-wider">Direct Mill & Yard Procurement</span>
+      </div>
+
+    </div>
+
+    <!-- Official Accreditations Strip -->
+    <div class="mt-16 p-8 rounded-3xl bg-slate-100 dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 flex flex-wrap justify-around items-center gap-8 text-center">
+      <div>
+        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold">General Contracting License</div>
+        <div class="text-base font-bold text-slate-900 dark:text-white mt-1">#CON-88492-X Registered</div>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-slate-300 dark:bg-slate-700"></div>
+      <div>
+        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold">Safety Accreditation</div>
+        <div class="text-base font-bold text-slate-900 dark:text-white mt-1">ISO 4501 Occupational Health</div>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-slate-300 dark:bg-slate-700"></div>
+      <div>
+        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold">Green Building Design</div>
+        <div class="text-base font-bold text-slate-900 dark:text-white mt-1">LEED AP BD+C Certified Staff</div>
+      </div>
+      <div class="hidden sm:block w-px h-10 bg-slate-300 dark:bg-slate-700"></div>
+      <div>
+        <div class="text-[11px] uppercase tracking-widest text-slate-400 font-bold">Federal Standards</div>
+        <div class="text-base font-bold text-slate-900 dark:text-white mt-1">100% OSHA Site Protocol</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="py-16 bg-slate-900 text-white dark:bg-amber-500 dark:text-slate-950 border-t border-slate-800 dark:border-amber-600/30 px-6 transition-colors duration-200">
+    <div class="max-w-[1700px] mx-auto px-2 lg:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="text-3xl font-extrabold tracking-tight text-white dark:text-slate-950">Ready to partner with an uncompromising builder?</h3>
+        <p class="text-sm text-slate-400 dark:text-slate-900/80 font-medium mt-1">Submit your drawings or RFP to our principal estimating team for line-item review.</p>
+      </div>
+      <a href="contact.html" class="bg-amber-500 hover:bg-amber-400 text-slate-950 dark:bg-slate-950 dark:hover:bg-slate-800 dark:text-white font-bold py-3.5 px-8 rounded-xl text-xs uppercase tracking-wider transition shrink-0 shadow-lg shadow-amber-500/20 dark:shadow-slate-950/20">Initiate Bidding</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer
+    class="liquid-glass-footer py-8 sm:py-10 px-6 transition-colors duration-200 relative z-10">
+    <div class="max-w-[1700px] mx-auto px-2 lg:px-6 flex flex-col md:flex-row justify-between items-center gap-8">
+
+      <!-- Footer Logo -->
+      <div class="flex items-center gap-3.5">
+        <img src="logo.png" alt="Plan.B Logo" class="h-12 sm:h-14 w-auto object-contain dark:brightness-0 dark:invert">
+        <div class="leading-none flex flex-col justify-center">
+          <span class="text-2xl sm:text-3xl font-black uppercase tracking-wider text-slate-900 dark:text-white">
+            PLAN<span class="text-amber-500">.B</span>
+          </span>
+          <span class="text-xs sm:text-sm font-semibold tracking-tight text-slate-500 dark:text-slate-400 mt-0.5">
+            Engineering Solutions
+          </span>
+          <p class="text-slate-500 dark:text-slate-400 text-xs mt-2 leading-tight">Heavy Infrastructure & Commercial Development.</p>
+        </div>
+      </div>
+
+      <!-- Quick Nav Links in Footer -->
+      <div class="flex flex-wrap gap-6 lg:gap-10 text-xs text-slate-600 dark:text-slate-400">
+        <a href="index.html" class="hover:text-amber-500 transition-colors">Home</a>
+        <a href="services.html" class="hover:text-amber-500 transition-colors">Services</a>
+        <a href="calculator.html" class="hover:text-amber-500 transition-colors">Cost Estimator</a>
+        <a href="projects.html" class="hover:text-amber-500 transition-colors">Projects</a>
+        <a href="contact.html" class="hover:text-amber-500 transition-colors">Contact & Map</a>
+      </div>
+
+      <!-- Footer Social Presence -->
+      <div class="flex items-center space-x-3">
+        <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"
+          class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+          </svg>
+        </a>
+        <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"
+          class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+          </svg>
+        </a>
+        <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"
+          class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path
+              d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+          </svg>
+        </a>
+        <button type="button" aria-label="Share Link"
+          class="copy-link-btn w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-400 hover:bg-amber-500/10 dark:hover:bg-amber-500/20 hover:border-amber-500/50 dark:hover:border-amber-500/50 transition cursor-pointer">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
+          </svg>
+        </button>
+      </div>
+
+      <div class="text-slate-400 dark:text-slate-500 text-xs text-center md:text-right space-y-1">
+        <div>&copy; 2026 Plan.B Engineering Solutions. All rights reserved.</div>
+        <div class="text-[11px] text-slate-500 dark:text-slate-400">
+          Developed by <a href="https://pk.linkedin.com/in/hixzi" target="_blank" rel="noopener noreferrer"
+            class="font-medium text-slate-700 dark:text-slate-300 hover:text-amber-500 dark:hover:text-amber-500 transition-colors">Muhammad
+            Salman</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // 0. PAGE TRANSITION HANDLER (STATIONARY NAVBAR)
+      const pageWrap = document.getElementById('pageContent');
+      if (pageWrap) {
+        requestAnimationFrame(() => pageWrap.classList.add('page-loaded'));
+      }
+
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:') || anchor.getAttribute('target') === '_blank' || e.metaKey || e.ctrlKey || e.shiftKey) return;
+        
+        const currentFile = window.location.pathname.split('/').pop() || 'index.html';
+        const targetFile = href.split('#')[0].split('/').pop();
+        if (targetFile && targetFile !== currentFile) {
+          if (pageWrap) {
+            e.preventDefault();
+            pageWrap.classList.remove('page-loaded');
+            pageWrap.classList.add('page-exiting');
+            setTimeout(() => { window.location.href = href; }, 240);
+          }
+        }
+      });
+    });
+
+    const html = document.documentElement;
+    const themeToggle = document.getElementById('themeToggle');
+    const sunIcon = document.getElementById('sunIcon');
+    const moonIcon = document.getElementById('moonIcon');
+    function updateIcons(isDark) {
+      if (sunIcon && moonIcon) {
+        if (isDark) { sunIcon.classList.remove('hidden'); moonIcon.classList.add('hidden'); }
+        else { sunIcon.classList.add('hidden'); moonIcon.classList.remove('hidden'); }
+      }
+    }
+    updateIcons(html.classList.contains('dark'));
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        const isDark = html.classList.toggle('dark');
+        localStorage.setItem('apex_theme', isDark ? 'dark' : 'light');
+        updateIcons(isDark);
+      });
+    }
+
+    // HEADER BOTTOM OUTLINE SCROLL PROGRESS ANIMATION
+    function updateHeaderProgress() {
+      const progressBar = document.getElementById('headerScrollProgress');
+      if (!progressBar) return;
+      const winScroll = window.scrollY || document.documentElement.scrollTop || 0;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const pct = height > 0 ? (winScroll / height) * 100 : 0;
+      progressBar.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+    }
+    window.addEventListener('scroll', updateHeaderProgress, { passive: true });
+    window.addEventListener('resize', updateHeaderProgress, { passive: true });
+    document.addEventListener('DOMContentLoaded', updateHeaderProgress);
+    updateHeaderProgress();
+
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileBackdrop = document.getElementById('mobileMenuBackdrop');
+    const burger = document.getElementById('menuBurger');
+    const close = document.getElementById('menuClose');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+    const mobileSearch = document.getElementById('mobileSearchInput');
+
+    function openMobileMenu() {
+      if (mobileMenu) mobileMenu.classList.remove('hidden');
+      if (mobileBackdrop) mobileBackdrop.classList.remove('hidden');
+      if (burger) burger.classList.add('hidden');
+      if (close) close.classList.remove('hidden');
+    }
+
+    function closeMobileMenu() {
+      if (mobileMenu) mobileMenu.classList.add('hidden');
+      if (mobileBackdrop) mobileBackdrop.classList.add('hidden');
+      if (burger) burger.classList.remove('hidden');
+      if (close) close.classList.add('hidden');
+      if (mobileSearch) {
+        mobileSearch.value = '';
+        document.querySelectorAll('#mobileNavItems .mobile-nav-link').forEach(el => el.style.display = 'block');
+      }
+    }
+
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu && !mobileMenu.classList.contains('hidden');
+      if (isOpen) closeMobileMenu();
+      else openMobileMenu();
+    }
+
+    if (mobileBtn) mobileBtn.addEventListener('click', toggleMobileMenu);
+    if (mobileBackdrop) mobileBackdrop.addEventListener('click', closeMobileMenu);
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    if (mobileSearch) {
+      mobileSearch.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        document.querySelectorAll('#mobileNavItems .mobile-nav-link').forEach(item => {
+          const text = item.textContent.toLowerCase();
+          item.style.display = text.includes(query) ? 'block' : 'none';
+        });
+      });
+    }
+
+    // COPY WEBSITE HOMEPAGE LINK HANDLER WITH TOAST NOTIFICATION
+    function showCopyToast(msg) {
+      let toast = document.getElementById('copyToast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'copyToast';
+        toast.className = 'fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-950 border border-slate-700/50 dark:border-slate-200 shadow-2xl text-xs font-bold tracking-wide transition-all duration-300 opacity-0 translate-y-4 pointer-events-none';
+        toast.innerHTML = `
+          <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+          </svg>
+          <span id="copyToastText">${msg}</span>
+        `;
+        document.body.appendChild(toast);
+      } else {
+        document.getElementById('copyToastText').textContent = msg;
+      }
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+        toast.classList.add('opacity-100', 'translate-y-0');
+      });
+
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 2500);
+    }
+
+    const linkSvg = `<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>`;
+    const checkSvg = `<svg class="w-4 h-4 text-amber-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`;
+
+    const copyLinkBtns = document.querySelectorAll('.copy-link-btn');
+    copyLinkBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        let homeUrl = window.location.origin + window.location.pathname;
+        if (homeUrl.endsWith('.html')) {
+          homeUrl = homeUrl.substring(0, homeUrl.lastIndexOf('/') + 1) + 'index.html';
+        } else if (!homeUrl.endsWith('/')) {
+          homeUrl += '/index.html';
+        }
+
+        const performCopy = () => {
+          btn.innerHTML = checkSvg;
+          btn.classList.add('border-amber-500', 'bg-amber-500/10');
+          showCopyToast("Website homepage link copied!");
+          setTimeout(() => {
+            btn.innerHTML = linkSvg;
+            btn.classList.remove('border-amber-500', 'bg-amber-500/10');
+          }, 2000);
+        };
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(homeUrl).then(performCopy).catch(() => {
+            const temp = document.createElement('input');
+            temp.value = homeUrl;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            performCopy();
+          });
+        } else {
+          const temp = document.createElement('input');
+          temp.value = homeUrl;
+          document.body.appendChild(temp);
+          temp.select();
+          document.execCommand('copy');
+          document.body.removeChild(temp);
+          performCopy();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
